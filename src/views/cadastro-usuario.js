@@ -6,20 +6,34 @@ import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
 import { mensagemSucesso } from '../components/toastr';
+import { mensagemErro } from '../components/toastr';
 
 class CadastroUsuario extends React.Component {
   state = {
     nome: '',
+    celular: '',
     email: '',
     senha: '',
     senhaRepeticao: '',
   };
 
   cadastrar = () => {
-    mensagemSucesso(`Usuário ${this.state.nome} cadastrado com sucesso!`);
+    if(this.state.senha == this.state.senhaRepeticao){
+      mensagemSucesso(`Usuário ${this.state.nome} cadastrado com sucesso!`);  
+    }
+    else{
+      mensagemErro('As senhas informadas são diferentes.')
+    }
   };
 
-  cancelar = () => {};
+  cancelar = () => { 
+    this.setState({nome: '',
+      celular: '',
+      email: '',
+      senha: '',
+      senhaRepeticao: ''
+    });
+  };
 
   render() {
     return (
@@ -36,6 +50,16 @@ class CadastroUsuario extends React.Component {
                     className='form-control'
                     name='nome'
                     onChange={(e) => this.setState({ nome: e.target.value })}
+                  />
+                </FormGroup>
+                <FormGroup label='Celular: *' htmlFor='inputTelefone'>
+                  <input
+                    type='text'
+                    id='inputCelular'
+                    value={this.state.celular}
+                    className='form-control'
+                    name='celular'
+                    onChange={(e) => this.setState({ celular: e.target.value })}
                   />
                 </FormGroup>
                 <FormGroup label='Email: *' htmlFor='inputEmail'>
