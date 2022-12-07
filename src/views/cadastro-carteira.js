@@ -1,0 +1,62 @@
+import React from 'react';
+
+import Stack from '@mui/material/Stack';
+
+import Card from '../components/card';
+import FormGroup from '../components/form-group';
+
+import { mensagemSucesso } from '../components/toastr';
+
+
+class CadastroCarteira extends React.Component {
+
+    state = {
+        nome: '',
+        dataDaCriacao: ''
+    };
+
+    render() {
+        return (
+            <div className='container'>
+                <Card title='Cadastro de Carteira'>
+                    <div className='row'>
+                        <div className='col-lg-12'>
+                            <div className='bs-component'>
+                                <FormGroup label='Nome: *' htmlFor='inputNome'>
+                                    <input
+                                        type='text'
+                                        id='inputNome'
+                                        value={this.state.nome}
+                                        className='form-control'
+                                        name='nome'
+                                        onChange={(e) => this.setState({ nome: e.target.value })}
+                                    />
+                                </FormGroup>
+                                <FormGroup label='Data da criação: *' htmlFor='inputDataDaCriacao'>
+                                    <input
+                                        type='date'
+                                        id='inputinputDataDaCriacaoSenha'
+                                        value={this.state.dataDaCriacao}
+                                        className='form-control'
+                                        name='dataDaCriacao'
+                                        onChange={(e) => this.setState({ dataDaCriacao: e.target.value })}
+                                    />
+                                </FormGroup>
+                            </div>
+                        </div>
+                    </div>
+                    <button
+                        type='button'
+                        className='btn btn-success'
+                        style={{ marginTop: '10px' }}
+                    >
+                        Confirmar
+                    </button>
+                </Card>
+            </div>
+        );
+    };
+
+}
+
+export default CadastroCarteira;
