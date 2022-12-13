@@ -8,12 +8,13 @@ import Login from './views/login';
 import CadastroUsuario from './views/cadastro-usuario';
 import ListaCarteiras from './views/lista-carteiras';
 import CadastroCarteira from './views/cadastro-carteira';
+import CadastroAtivo from './views/cadastro-ativo';
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <CadastroCarteira />
+        <CadastroAtivo />
       </div>
     );
   }
