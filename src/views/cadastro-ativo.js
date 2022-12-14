@@ -21,6 +21,25 @@ class CadastroAtivo extends React.Component {
         dataAquisicao: ''
     };
 
+    cadastrar = () => {
+        if (this.state.senha == this.state.senhaRepeticao) {
+            mensagemSucesso(`Ativo ${this.state.nome} cadastrado com sucesso!`);
+        }
+    };
+
+    cancelar = () => {
+        this.setState({
+            nome: '',
+            abreviatura: '',
+            setor: '',
+            precoUnit: '',
+            quantidade: '',
+            carencia: '',
+            impostos: '',
+            dataAquisicao: ''
+        });
+    };
+
     render() {
         return (
             <div className='container'>
@@ -101,13 +120,22 @@ class CadastroAtivo extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <button
-                        type='button'
-                        className='btn btn-success'
-                        style={{ marginTop: '10px' }}
-                    >
-                        Confirmar
-                    </button>
+                    <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
+                        <button
+                            onClick={this.cadastrar}
+                            type='button'
+                            className='btn btn-success'
+                        >
+                            Salvar
+                        </button>
+                        <button
+                            onClick={this.cancelar}
+                            type='button'
+                            className='btn btn-danger'
+                        >
+                            Cancelar
+                        </button>
+                    </Stack>
                 </Card>
             </div>
         );

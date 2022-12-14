@@ -96,7 +96,7 @@ class CadastroUsuario extends React.Component {
                     }
                   />
                 </FormGroup>
-                <Stack spacing={1} padding={1} direction='row'>
+                <Stack spacing={1} direction='row' style={{marginTop: '20px'}}>
                   <button
                     onClick={this.cadastrar}
                     type='button'

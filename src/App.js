@@ -9,12 +9,15 @@ import CadastroUsuario from './views/cadastro-usuario';
 import ListaCarteiras from './views/lista-carteiras';
 import CadastroCarteira from './views/cadastro-carteira';
 import CadastroAtivo from './views/cadastro-ativo';
+import Rotas from './Rotas';
+import Navbar from './components/navbar';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <CadastroAtivo />
+      <div className='container'>
+        <Rotas />
+        <Navbar />
       </div>
     );
   }

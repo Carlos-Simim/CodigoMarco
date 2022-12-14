@@ -7,6 +7,8 @@ import FormGroup from '../components/form-group';
 
 import { mensagemSucesso } from '../components/toastr';
 import CadastroUsuario from './cadastro-usuario';
+import { useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
 
 
 class Login extends React.Component {
@@ -15,7 +17,7 @@ class Login extends React.Component {
         senha: '',
     };
 
-    cadastrar = () => {
+    logar = () => {
         mensagemSucesso('Login realizado com sucesso!');
     };
 
@@ -26,6 +28,10 @@ class Login extends React.Component {
             </div>
         );
     };
+
+    nextPath(path) {
+        this.props.history.push(path);
+    }
 
     render() {
 
@@ -55,14 +61,14 @@ class Login extends React.Component {
                                         onChange={(e) => this.setState({ senha: e.target.value })}
                                     />
                                 </FormGroup>
-                                <Stack spacing={1} padding={1} direction='row'>
-                                    <button
-                                        onClick={this.cadastrar}
+                                <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
+                                    <Button
+                                        onClick={this.logar}
                                         type='button'
                                         className='btn btn-success'
                                     >
                                         Login
-                                    </button>
+                                    </Button>
                                     <button
                                         onClick={this.telaCadastro}
                                         type='button'
