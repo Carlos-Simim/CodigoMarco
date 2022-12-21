@@ -47,6 +47,11 @@ function Navbar(props) {
               href='/login'
               label='Login'
             />
+            <NavbarItem
+              render='true'
+              href='/detalhe-carteira'
+              label='DetalheCarteira'
+            />
           </ul>
         </div>
       </div>
