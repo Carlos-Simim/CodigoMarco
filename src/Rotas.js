@@ -1,26 +1,43 @@
 import React from 'react';
 
+import 'bootswatch/dist/flatly/bootstrap.css';
+import './custom.css';
+import 'toastr/build/toastr.min';
+import 'toastr/build/toastr.css';
+
 import CadastroUsuario from './views/cadastro-usuario';
 
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import CadastroAtivo from './views/cadastro-ativo';
 import CadastroCarteira from './views/cadastro-carteira';
 import ListaCarteiras from './views/lista-carteiras';
-import Login from './views/login';
+import LoginPage from './views/login';
 import DetalheCarteira from './views/detalhe-carteira';
 
-function Rotas(props) {
+const Rotas = () => {
+
+  const RequireAuth = ({ children }) => {
+    return localStorage.getItem("token") ? children: <Navigate to="/" />
+  }
+
   return (
-    <BrowserRouter>
+    
       <Routes>
+
+        <Route path='/' element={<LoginPage />} />
+
         <Route path='/cadastro-usuarios' element={<CadastroUsuario />} />
-        <Route path='/cadastro-ativo' element={<CadastroAtivo />} />
-        <Route path='/cadastro-carteira' element={<CadastroCarteira />} />
-        <Route path='/lista-carteiras' element={<ListaCarteiras />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/detalhe-carteira' element={<DetalheCarteira />} />      
+
+        <Route  path='/cadastro-ativo' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
+
+        <Route path='/cadastro-carteira' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
+        
+        <Route  path='/lista-carteiras' element={ <RequireAuth> <ListaCarteiras /> </RequireAuth>  } />  
+        
+        <Route path='/detalhe-carteira' element={ <RequireAuth>  <DetalheCarteira />  </RequireAuth>  } />      
+      
       </Routes>
-    </BrowserRouter>
+
   );
 }
 

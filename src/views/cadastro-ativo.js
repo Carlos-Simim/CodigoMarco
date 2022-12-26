@@ -22,7 +22,7 @@ class CadastroAtivo extends React.Component {
     };
 
     cadastrar = () => {
-        if (this.state.senha == this.state.senhaRepeticao) {
+        if (this.state.senha === this.state.senhaRepeticao) {
             mensagemSucesso(`Ativo ${this.state.nome} cadastrado com sucesso!`);
         }
     };

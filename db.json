@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+
+  "carteiras": [
+    {
+      "id": 1,
+      "nome": "carteira1",
+      "datacriacao": "10/11/2022",
+      "datamodificacao": "10/11/2022",
+      "usuario_id": 1
+    },
+    {
+      "id": 2,
+      "nome": "carteira2",
+      "datacriacao": "10/11/2022",
+      "datamodificacao": "10/11/2022",
+      "usuario_id": 1
+    },
+    {
+      "id": 3,
+      "nome": "carteira4",
+      "datacriacao": "10/11/2022",
+      "datamodificacao": "10/11/2022",
+      "usuario_id": 1
+    }
+  ]
+}

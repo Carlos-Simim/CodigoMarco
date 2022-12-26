@@ -1,50 +1,70 @@
 import React from 'react';
-
-import Stack from '@mui/material/Stack';
-
 import Card from '../components/card';
-import FormGroup from '../components/form-group';
+import { useState, useEffect } from "react";
+import Navbar from '../components/navbar/navbar';
+import Footer from '../components/footer/footer';
+import { Link } from "react-router-dom";
+//import { useNavigate } from 'react-router-dom';
+import { getCarteiras } from '../services/carteiraservice';
 
-import { mensagemSucesso } from '../components/toastr';
+const ListaCarteiras = () => {
+
+    //const navigate = useNavigate();
+    const [carteiras, setCarteiras] = useState([]);
+
+    useEffect(() => {
+        getCarteiras()
+            .then(response => {
+                setCarteiras(response.carteiras);
+        })
+    }, []);
 
 
-class ListaCarteiras extends React.Component {
-    
-    render() {
-        return (
-            <div className='container'>
-                <Card title='Carteiras'>
-                    <div className='row'>
-                        <div className='col-lg-12'>
-                            <div className='bs-component'>
-                                <table className='table table-hover'>                                    
-                                    <tbody>
-                                        <tr>
-                                            <td>Carteira 1</td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>Carteira 2</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Carteira 3</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+    const onClickCarteira = (x) => {
+        // navigate({
+        //  pathname:"carteira/get",
+        //  search: `carteira_id=${x.id}`
+        // });
+      }
+
+    const getTo = (toName) => {
+        return window.location.pathname === toName ? true : false
+    }
+
+    return (
+        <div className='container'>
+            <Navbar title="Gerenciador de investimentos" deslogar={true} />
+            <Card title='Carteiras'>
+                <div className='row'>
+                    <div className='col-lg-12'>
+                        <div className='bs-component'>
+                            <table className='table table-hover'>
+                                <tbody>
+                                    {
+                                        carteiras?.map(x => (
+                                            <tr key={x.id}>
+                                                <td onClick={() => onClickCarteira(x)} style={{ cursor: "pointer" }} >{x.nome} </td>
+
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <button
+                </div>
+                {/* <button
                         type='button'
                         className='btn btn-success'
                         style={{ float: 'right' }}
                     >
                         Cadastrar carteira
-                    </button>
-                </Card>
-            </div>
-        );
-    };
-
+                    </button> */}
+                <Link style={{ float: 'right' }} className='btn btn-success' to={getTo('/cadastro-carteira') ? '#' : '/cadastro-carteira'}>Cadastrar carteira</Link>
+            </Card>
+            <Footer />
+        </div>
+    );
 }
 
 export default ListaCarteiras;

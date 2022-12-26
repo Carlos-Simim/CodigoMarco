@@ -6,6 +6,7 @@ import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
 import { mensagemSucesso } from '../components/toastr';
+import {  Link  } from "react-router-dom";
 
 
 class CadastroCarteira extends React.Component {
@@ -16,7 +17,7 @@ class CadastroCarteira extends React.Component {
     };
 
     cadastrar = () => {
-        if (this.state.senha == this.state.senhaRepeticao) {
+        if (this.state.senha === this.state.senhaRepeticao) {
             mensagemSucesso(`Carteira ${this.state.nome} cadastrada com sucesso!`);
         }
     };
@@ -27,6 +28,10 @@ class CadastroCarteira extends React.Component {
             dataDaCriacao: ''
         });
     };
+
+    getTo = (toName) => {
+        return window.location.pathname === toName ? true : false
+    }
 
     render() {
         return (
@@ -66,13 +71,14 @@ class CadastroCarteira extends React.Component {
                         >
                             Salvar
                         </button>
-                        <button
+                        {/* <button
                             onClick={this.cancelar}
                             type='button'
                             className='btn btn-danger'
                         >
                             Cancelar
-                        </button>
+                        </button> */}
+                        <Link className='btn btn-danger' to={this.getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Cancelar</Link>
                     </Stack>
                 </Card>
             </div>
