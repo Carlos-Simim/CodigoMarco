@@ -34,7 +34,7 @@ const Rotas = () => {
         
         <Route  path='/lista-carteiras' element={ <RequireAuth> <ListaCarteiras /> </RequireAuth>  } />  
         
-        <Route path='/detalhe-carteira' element={ <RequireAuth>  <DetalheCarteira />  </RequireAuth>  } />      
+        <Route path='/carteira' element={ <RequireAuth>  <DetalheCarteira />  </RequireAuth>  } />      
       
       </Routes>
 

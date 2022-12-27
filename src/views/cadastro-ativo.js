@@ -4,142 +4,131 @@ import Stack from '@mui/material/Stack';
 
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
-
+import { useState } from "react";
 import { mensagemSucesso } from '../components/toastr';
+import { useNavigate } from "react-router-dom";
 
 
-class CadastroAtivo extends React.Component {
+const CadastroAtivo = () => {
 
-    state = {
-        nome: '',
-        abreviatura: '',
-        setor: '',
-        precoUnit: '',
-        quantidade: '',
-        carencia: '',
-        impostos: '',
-        dataAquisicao: ''
+    const navigate = useNavigate();
+
+    const cadastrar = () => {
+        //if (this.state.senha === this.state.senhaRepeticao) {
+            console.log("oi")
+            mensagemSucesso(`Ativo cadastrado com sucesso!`);
+        //}
     };
 
-    cadastrar = () => {
-        if (this.state.senha === this.state.senhaRepeticao) {
-            mensagemSucesso(`Ativo ${this.state.nome} cadastrado com sucesso!`);
-        }
-    };
+    const [nome, setNome] = useState('');
+    const [abreviatura, setAbreviatura] = useState('');
+    const [setor, setSetor] = useState('');
 
-    cancelar = () => {
-        this.setState({
-            nome: '',
-            abreviatura: '',
-            setor: '',
-            precoUnit: '',
-            quantidade: '',
-            carencia: '',
-            impostos: '',
-            dataAquisicao: ''
-        });
-    };
+    const [precoUnit, setPrecoUnit] = useState('');
+    const [quantidade, setQuantidade] = useState('');
+    const [carencia, setCarencia] = useState('');
+    //const [impostos, setImpostos] = useState('');
+    const [dataAquisicao, setDataAquisicao] = useState('');
 
-    render() {
-        return (
-            <div className='container'>
-                <Card title='Cadastro de Ativos'>
-                    <div className='row'>
-                        <div className='col-lg-12'>
-                            <div className='bs-component'>
-                                <FormGroup label='Nome: *' htmlFor='inputNome'>
-                                    <input
-                                        type='text'
-                                        id='inputNome'
-                                        value={this.state.nome}
-                                        className='form-control'
-                                        name='nome'
-                                        onChange={(e) => this.setState({ nome: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Abreviatura: ' htmlFor='inputAbreviatura'>
-                                    <input
-                                        type='text'
-                                        id='inputAbreviatura'
-                                        value={this.state.abreviatura}
-                                        className='form-control'
-                                        name='abreviatura'
-                                        onChange={(e) => this.setState({ abreviatura: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Setor: *' htmlFor='inputSetor'>
-                                    <input
-                                        type='text'
-                                        id='inputSetor'
-                                        value={this.state.setor}
-                                        className='form-control'
-                                        name='setor'
-                                        onChange={(e) => this.setState({ setor: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Preço Unitário: *' htmlFor='inputPrecoUnitario'>
-                                    <input
-                                        type='number'
-                                        id='inputPrecoUnitario'
-                                        value={this.state.precoUnit}
-                                        className='form-control'
-                                        name='precoUnitario'
-                                        onChange={(e) => this.setState({ precoUnit: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Quantidade: *' htmlFor='inputQuantidade'>
-                                    <input
-                                        type='number'
-                                        id='inputQuantidade'
-                                        value={this.state.quantidade}
-                                        className='form-control'
-                                        name='quantidade'
-                                        onChange={(e) => this.setState({ quantidade: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Data Final da Carência:' htmlFor='inputCarencia'>
-                                    <input
-                                        type='date'
-                                        id='inputCarencia'
-                                        value={this.state.carencia}
-                                        className='form-control'
-                                        name='carencia'
-                                        onChange={(e) => this.setState({ carencia: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Data de Aquisição: ' htmlFor='inputDataAquisicao'>
-                                    <input
-                                        type='date'
-                                        id='inputDataAquisicao'
-                                        value={this.state.dataAquisicao}
-                                        className='form-control'
-                                        name='dataAquisicao'
-                                        onChange={(e) => this.setState({ dataAquisicao: e.target.value })}
-                                    />
-                                </FormGroup>
-                            </div>
+    return (
+        <div className='container'>
+            <Card title='Cadastro de Ativos'>
+                <div className='row'>
+                    <div className='col-lg-12'>
+                        <div className='bs-component'>
+                            <FormGroup label='Nome: *' htmlFor='inputNome'>
+                                <input
+                                    type='text'
+                                    id='inputNome'
+                                    value={nome}
+                                    className='form-control'
+                                    name='nome'
+                                    onChange={(e) => setNome(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Abreviatura: ' htmlFor='inputAbreviatura'>
+                                <input
+                                    type='text'
+                                    id='inputAbreviatura'
+                                    value={abreviatura}
+                                    className='form-control'
+                                    name='abreviatura'
+                                    onChange={(e) => setAbreviatura(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Setor: *' htmlFor='inputSetor'>
+                                <input
+                                    type='text'
+                                    id='inputSetor'
+                                    value={setor}
+                                    className='form-control'
+                                    name='setor'
+                                    onChange={(e) => setSetor(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Preço Unitário: *' htmlFor='inputPrecoUnitario'>
+                                <input
+                                    type='number'
+                                    id='inputPrecoUnitario'
+                                    value={precoUnit}
+                                    className='form-control'
+                                    name='precoUnitario'
+                                    onChange={(e) => setPrecoUnit(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Quantidade: *' htmlFor='inputQuantidade'>
+                                <input
+                                    type='number'
+                                    id='inputQuantidade'
+                                    value={quantidade}
+                                    className='form-control'
+                                    name='quantidade'
+                                    onChange={(e) => setQuantidade(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Data Final da Carência:' htmlFor='inputCarencia'>
+                                <input
+                                    type='date'
+                                    id='inputCarencia'
+                                    value={carencia}
+                                    className='form-control'
+                                    name='carencia'
+                                    onChange={(e) => setCarencia(e.target.value)}
+                                />
+                            </FormGroup>
+                            <FormGroup label='Data de Aquisição: ' htmlFor='inputDataAquisicao'>
+                                <input
+                                    type='date'
+                                    id='inputDataAquisicao'
+                                    value={dataAquisicao}
+                                    className='form-control'
+                                    name='dataAquisicao'
+                                    onChange={(e) => setDataAquisicao(e.target.value)}
+                                />
+                            </FormGroup>
                         </div>
                     </div>
-                    <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
-                        <button
-                            onClick={this.cadastrar}
-                            type='button'
-                            className='btn btn-success'
-                        >
-                            Salvar
-                        </button>
-                        <button
-                            onClick={this.cancelar}
+                </div>
+                <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
+                    <button
+                        onClick={cadastrar}
+                        type='button'
+                        className='btn btn-success'
+                    >
+                        Salvar
+                    </button>
+                    <button
+                            onClick={() => navigate(-1)}
                             type='button'
                             className='btn btn-danger'
                         >
                             Cancelar
                         </button>
-                    </Stack>
-                </Card>
-            </div>
-        );
-    };
+                    {/* <Link className='btn btn-danger' to={getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Cancelar</Link> */}
+                </Stack>
+            </Card>
+        </div>
+    );
 
 }
 

@@ -1,33 +1,236 @@
 {
-  "posts": [
-    {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
-    }
-  ],
+    "usuarios":[
+        {
+            "id":1,
+            "nome":"carlos",
+            "telefone":"1234-5678",
+            "email":"teste@gmail.com"
+        },
+        {
+            "id":2,
+            "nome":"lucas",
+            "telefone":"1234-5678",
+            "email":"teste@gmail.com"
+        },
+        {
+            "id":3,
+            "nome":"daniel",
+            "telefone":"1234-5678",
+            "email":"teste@gmail.com"
+        }
+    ],
+    "carteiras":[
+        {
+            "id":1,
+            "nome":"carteira1",
+            "datacriacao":"10/11/2022",
+            "datamodificacao":"10/11/2022",
+            "usuario_id":1
+        },
+        {
+            "id":2,
+            "nome":"carteira2",
+            "datacriacao":"10/11/2022",
+            "datamodificacao":"10/11/2022",
+            "usuario_id":1
+        },
+        {
+            "id":3,
+            "nome":"carteira3",
+            "datacriacao":"10/11/2022",
+            "datamodificacao":"10/11/2022",
+            "usuario_id":1
+        }
+    ],
+    "carteira":[
+        {
+            "id":1,
+            "nome":"PETR4",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":1
+        },
+        {
+            "id":2,
+            "nome":"PETR3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":1
+        },
+        {
+            "id":3,
+            "nome":"SULA11",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":1
+        },
 
-  "carteiras": [
-    {
-      "id": 1,
-      "nome": "carteira1",
-      "datacriacao": "10/11/2022",
-      "datamodificacao": "10/11/2022",
-      "usuario_id": 1
-    },
-    {
-      "id": 2,
-      "nome": "carteira2",
-      "datacriacao": "10/11/2022",
-      "datamodificacao": "10/11/2022",
-      "usuario_id": 1
-    },
-    {
-      "id": 3,
-      "nome": "carteira4",
-      "datacriacao": "10/11/2022",
-      "datamodificacao": "10/11/2022",
-      "usuario_id": 1
-    }
-  ]
+        {
+            "id":4,
+            "nome":"AMER3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":2
+        },
+        {
+            "id":5,
+            "nome":"CSNA3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":2
+        },
+        {
+            "id":6,
+            "nome":"SLCE3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":2
+        },
+
+        {
+            "id":7,
+            "nome":"LREN3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":3
+        },
+        {
+            "id":8,
+            "nome":"TOTS3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":4
+        },
+        {
+            "id":9,
+            "nome":"DXCO3",
+            "pm": 10,
+            "rentabilidade":10.2,
+            "dataaquisicao":"10/11/2022",
+            "datamodificacao":"15/11/2022",
+            "ativo_id":1,
+            "carteira_id":5
+        }
+    ],
+    "ativos":[
+        {
+            "id":1,
+            "nome":"Petrobras",
+            "tipo":"Ação",
+            "moeda_id":1
+        },
+        {
+            "id":2,
+            "nome":"Petrobras",
+            "tipo":"Ação",
+            "moeda_id":1
+        },
+        {
+            "id":3,
+            "nome":"Petrobras",
+            "tipo":"Ação",
+            "moeda_id":1
+        }
+    ],
+    "moedas":[
+        {
+            "id":1,
+            "nome":"Real"
+        },
+        {
+            "id":2,
+            "nome":"Dólar"
+        },
+        {
+            "id":3,
+            "nome":"Euro"
+        }
+    ],
+    "taxas":[
+        {
+            "id":1,
+            "nome":"Imposto",
+            "porcentagem":0.1,
+            "datavencimento":"10/11/2022",
+            "ativoadquirido_id":1
+        },
+        {
+            "id":2,
+            "nome":"Imposto",
+            "porcentagem":0.1,
+            "datavencimento":"10/11/2022",
+            "ativoadquirido_id":1
+        },
+        {
+            "id":3,
+            "nome":"Taxa de resgate CDB",
+            "porcentagem":0.1,
+            "datavencimento":"10/11/2022",
+            "ativoadquirido_id":2
+        }
+    ],
+    "historicosdeproventos":[
+        {
+            "id":1,
+            "data":"10/11/2022",
+            "valor":10,
+            "ativo_id":1
+        },
+        {
+            "id":2,
+            "data":"10/11/2022",
+            "valor":10,
+            "ativo_id":1
+        },
+        {
+            "id":3,
+            "data":"10/11/2022",
+            "valor":10,
+            "ativo_id":1
+        }
+    ],
+    "historicosdeprecos":[
+        {
+            "id":1,
+            "data":"10/11/2022",
+            "valor":10,
+            "ativo_id":1
+        },
+        {
+            "id":2,
+            "data":"10/11/2022",
+            "valor":10,
+            "ativo_id":1
+        },
+        {
+            "id":3,
+            "data":"10/11/2022",
+            "valor":10,
+            "ativo_id":1
+        }
+    ]
 }

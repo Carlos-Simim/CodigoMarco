@@ -4,28 +4,28 @@ import { useState, useEffect } from "react";
 import Navbar from '../components/navbar/navbar';
 import Footer from '../components/footer/footer';
 import { Link } from "react-router-dom";
-//import { useNavigate } from 'react-router-dom';
-import { getCarteiras } from '../services/carteiraservice';
+import { useNavigate } from 'react-router-dom';
+//import { getCarteiras } from '../services/carteiraservice';
+
+import { BASE_URL } from "../utils/requests";
+import axios from 'axios';
 
 const ListaCarteiras = () => {
 
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const [carteiras, setCarteiras] = useState([]);
 
     useEffect(() => {
-        getCarteiras()
+        axios.get(`${BASE_URL}/carteiras`)
             .then(response => {
-                setCarteiras(response.carteiras);
-        })
+                setCarteiras(response.data);
+            })
     }, []);
 
 
     const onClickCarteira = (x) => {
-        // navigate({
-        //  pathname:"carteira/get",
-        //  search: `carteira_id=${x.id}`
-        // });
-      }
+        navigate(`/carteira?carteira_id=${x.id}`);
+    }
 
     const getTo = (toName) => {
         return window.location.pathname === toName ? true : false
@@ -39,12 +39,20 @@ const ListaCarteiras = () => {
                     <div className='col-lg-12'>
                         <div className='bs-component'>
                             <table className='table table-hover'>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th className="d-none d-sm-table-cell" >Data criação</th>
+                                        <th className="d-none d-sm-table-cell" >Data modificação</th>
+                                    </tr>
+                                </thead>
                                 <tbody>
                                     {
                                         carteiras?.map(x => (
                                             <tr key={x.id}>
                                                 <td onClick={() => onClickCarteira(x)} style={{ cursor: "pointer" }} >{x.nome} </td>
-
+                                                <td >{x.datacriacao} </td>
+                                                <td >{x.datamodificacao} </td>
                                             </tr>
                                         ))
                                     }
@@ -53,13 +61,7 @@ const ListaCarteiras = () => {
                         </div>
                     </div>
                 </div>
-                {/* <button
-                        type='button'
-                        className='btn btn-success'
-                        style={{ float: 'right' }}
-                    >
-                        Cadastrar carteira
-                    </button> */}
+
                 <Link style={{ float: 'right' }} className='btn btn-success' to={getTo('/cadastro-carteira') ? '#' : '/cadastro-carteira'}>Cadastrar carteira</Link>
             </Card>
             <Footer />
