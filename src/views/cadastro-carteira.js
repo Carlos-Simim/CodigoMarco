@@ -7,7 +7,8 @@ import FormGroup from '../components/form-group';
 
 import { mensagemSucesso } from '../components/toastr';
 import {  Link  } from "react-router-dom";
-
+import Navbar from '../components/navbar/navbar';
+import Footer from '../components/footer/footer';
 
 class CadastroCarteira extends React.Component {
 
@@ -36,6 +37,7 @@ class CadastroCarteira extends React.Component {
     render() {
         return (
             <div className='container'>
+                <Navbar deslogar={true} />
                 <Card title='Cadastro de Carteira'>
                     <div className='row'>
                         <div className='col-lg-12'>
@@ -81,6 +83,7 @@ class CadastroCarteira extends React.Component {
                         <Link className='btn btn-danger' to={this.getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Cancelar</Link>
                     </Stack>
                 </Card>
+                <Footer />
             </div>
         );
     };

@@ -26,13 +26,52 @@ const DetalheCarteira = () => {
     }
 
     return (
-        <div className='container' style={{marginBottom: 150}}>
+        <div className='container' style={{ marginBottom: 150 }}>
             <Navbar title="Analizador de carteira" deslogar={true} />
             <Card title='Detalhes Carteira'>
-                <div className="row ">
+                <div className="row">
 
                     <div className="col-sm-6 mb-2">
-                        <SeriesChart />
+                        <table className='table table-hover'>
+                            <thead>
+                                <tr>
+                                    <th>Indicador</th>
+                                    <th> Valor </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td >Beta </td>
+                                    <td > 0.74 </td>
+
+                                </tr>
+                                <tr>
+                                    <td >Volatilidade </td>
+                                    <td > 1.74 </td>
+
+                                </tr>
+                                <tr>
+                                    <td >Risco </td>
+                                    <td > 3.54 </td>
+
+                                </tr>
+                                <tr>
+                                    <td >Retorno </td>
+                                    <td > 7.5 % </td>
+
+                                </tr>
+                                <tr>
+                                    <td >P/L </td>
+                                    <td > 0.98 </td>
+
+                                </tr>
+                                <tr>
+                                    <td >Total </td>
+                                    <td > R$ 15000.0 </td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
                     </div>
                     <div className="col-sm-6 mb-2">
                         <SeriesChart />
@@ -74,7 +113,7 @@ const DetalheCarteira = () => {
                 <Link style={{ float: 'left' }} className='btn btn-success ms-2' to={getTo('/cadastro-ativo') ? '#' : '/cadastro-ativo'}>Cadastrar Ativo</Link>
                 <Link style={{ float: 'left' }} className='btn btn-primary ms-2' to={getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Carteiras</Link>
             </Card>
- 
+
             <Footer />
         </div>
     );

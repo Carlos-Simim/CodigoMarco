@@ -7,6 +7,8 @@ import FormGroup from '../components/form-group';
 import { useState } from "react";
 import { mensagemSucesso } from '../components/toastr';
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/navbar/navbar';
+import Footer from '../components/footer/footer';
 
 
 const CadastroAtivo = () => {
@@ -15,8 +17,8 @@ const CadastroAtivo = () => {
 
     const cadastrar = () => {
         //if (this.state.senha === this.state.senhaRepeticao) {
-            console.log("oi")
-            mensagemSucesso(`Ativo cadastrado com sucesso!`);
+        console.log("oi")
+        mensagemSucesso(`Ativo cadastrado com sucesso!`);
         //}
     };
 
@@ -32,6 +34,7 @@ const CadastroAtivo = () => {
 
     return (
         <div className='container'>
+            <Navbar deslogar={true}/>
             <Card title='Cadastro de Ativos'>
                 <div className='row'>
                     <div className='col-lg-12'>
@@ -118,15 +121,15 @@ const CadastroAtivo = () => {
                         Salvar
                     </button>
                     <button
-                            onClick={() => navigate(-1)}
-                            type='button'
-                            className='btn btn-danger'
-                        >
-                            Cancelar
-                        </button>
-                    {/* <Link className='btn btn-danger' to={getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Cancelar</Link> */}
+                        onClick={() => navigate(-1)}
+                        type='button'
+                        className='btn btn-danger'
+                    >
+                        Cancelar
+                    </button>
                 </Stack>
             </Card>
+            <Footer />
         </div>
     );
 
