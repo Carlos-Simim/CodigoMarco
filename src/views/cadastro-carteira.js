@@ -6,7 +6,7 @@ import Card from '../components/card';
 import FormGroup from '../components/form-group';
 
 import { mensagemSucesso } from '../components/toastr';
-import {  Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar from '../components/navbar/navbar';
 import Footer from '../components/footer/footer';
 
@@ -66,20 +66,7 @@ class CadastroCarteira extends React.Component {
                         </div>
                     </div>
                     <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
-                        <button
-                            onClick={this.cadastrar}
-                            type='button'
-                            className='btn btn-success'
-                        >
-                            Salvar
-                        </button>
-                        {/* <button
-                            onClick={this.cancelar}
-                            type='button'
-                            className='btn btn-danger'
-                        >
-                            Cancelar
-                        </button> */}
+                        <Link className='btn btn-success' to={this.getTo('/lista-carteiras') ? '#' : '/lista-carteiras'} onClick={this.cadastrar}>Salvar</Link>
                         <Link className='btn btn-danger' to={this.getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Cancelar</Link>
                     </Stack>
                 </Card>

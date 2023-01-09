@@ -7,7 +7,7 @@ import FormGroup from '../components/form-group';
 
 import { mensagemSucesso } from '../components/toastr';
 import { mensagemErro } from '../components/toastr';
-import {  Link  } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class FormCadastroUsuario extends React.Component {
   state = {
@@ -19,26 +19,17 @@ class FormCadastroUsuario extends React.Component {
   };
 
   cadastrar = () => {
-    if(this.state.senha === this.state.senhaRepeticao){
-      mensagemSucesso(`Usuário ${this.state.nome} cadastrado com sucesso!`);  
+    if (this.state.senha === this.state.senhaRepeticao) {
+      mensagemSucesso(`Usuário ${this.state.nome} cadastrado com sucesso!`);
     }
-    else{
+    else {
       mensagemErro('As senhas informadas são diferentes.')
     }
   };
 
-  cancelar = () => { 
-    this.setState({nome: '',
-      celular: '',
-      email: '',
-      senha: '',
-      senhaRepeticao: ''
-    });
-  };
-
   getTo = (toName) => {
     return window.location.pathname === toName ? true : false
-    }
+  }
 
   render() {
     return (
@@ -106,31 +97,15 @@ class FormCadastroUsuario extends React.Component {
                         }
                       />
                     </FormGroup>
-                    <Stack spacing={1} direction='row' style={{marginTop: '20px'}}>
-                      <button
-                        onClick={this.cadastrar}
-                        type='button'
-                        className='btn btn-success'
-                      >
-                        Salvar
-                      </button>
-                      {/* <button
-                        onClick={this.cancelar}
-                        type='button'
-                        className='btn btn-danger'
-                      >
-                        Cancelar
-                      </button> */}
-
-                        <Link className='btn btn-danger' to={this.getTo('/') ?  '#': '/'  }>Cancelar</Link>
-
-
+                    <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
+                      <Link className='btn btn-success' to={this.getTo('/') ? '#' : '/'} onClick={this.cadastrar}>Salvar</Link>
+                      <Link className='btn btn-danger' to={this.getTo('/') ? '#' : '/'}>Cancelar</Link>
                     </Stack>
                   </div>
                 </div>
               </div>
             </Card>
-        </div>
+          </div>
         </div>
       </div>
     );

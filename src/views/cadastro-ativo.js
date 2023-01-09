@@ -19,6 +19,7 @@ const CadastroAtivo = () => {
         //if (this.state.senha === this.state.senhaRepeticao) {
         console.log("oi")
         mensagemSucesso(`Ativo cadastrado com sucesso!`);
+        navigate(-1);
         //}
     };
 
