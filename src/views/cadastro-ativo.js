@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
 import { useState } from "react";
-import { mensagemSucesso } from '../components/toastr';
+import { mensagemErro, mensagemSucesso } from '../components/toastr';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/navbar/navbar';
 import Footer from '../components/footer/footer';
@@ -16,11 +16,14 @@ const CadastroAtivo = () => {
     const navigate = useNavigate();
 
     const cadastrar = () => {
-        //if (this.state.senha === this.state.senhaRepeticao) {
+        if (this.state.senha === this.state.senhaRepeticao) {
         console.log("oi")
         mensagemSucesso(`Ativo cadastrado com sucesso!`);
         navigate(-1);
-        //}
+        }
+        else{
+            mensagemErro(`As senhas não conferem!`);
+        }
     };
 
     const [nome, setNome] = useState('');

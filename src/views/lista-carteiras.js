@@ -5,6 +5,10 @@ import Navbar from '../components/navbar/navbar';
 import Footer from '../components/footer/footer';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { mensagemErro, mensagemSucesso } from '../components/toastr';
 //import { getCarteiras } from '../services/carteiraservice';
 
 import { BASE_URL } from "../utils/requests";
@@ -31,6 +35,21 @@ const ListaCarteiras = () => {
         return window.location.pathname === toName ? true : false
     }
 
+    function editar(id) {
+        navigate(`/cadastro-carteira/${id}`);
+    }
+
+    function excluir(id){
+        axios.delete(`${BASE_URL}/carteiras/${id}`)
+            .then(response => {
+                const carteirasAtualizadas = carteiras.filter(carteira => carteira.id !== id);
+                setCarteiras(carteirasAtualizadas);
+                mensagemSucesso('Carteira excluída com sucesso!');
+            }).catch(error => {
+                mensagemErro(error.response.data);
+            })
+    }
+
     return (
         <div className='container'>
             <Navbar title="Gerenciador de investimentos" deslogar={true} />
@@ -49,10 +68,26 @@ const ListaCarteiras = () => {
                                 <tbody>
                                     {
                                         carteiras?.map(x => (
-                                            <tr key={x.id}>
+                                            <tr key={x.id} >
                                                 <td onClick={() => onClickCarteira(x)} style={{ cursor: "pointer" }} >{x.nome} </td>
                                                 <td >{x.datacriacao} </td>
                                                 <td >{x.datamodificacao} </td>
+                                                <td >
+                                                    <IconButton
+                                                        aria-label='edit'
+                                                        onClick={() => editar(x.id)}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                </td>
+                                                <td>
+                                                    <IconButton
+                                                        aria-label='delete'
+                                                        onClick={() => excluir(x.id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </td>
                                             </tr>
                                         ))
                                     }

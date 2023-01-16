@@ -30,7 +30,7 @@ const Rotas = () => {
 
         <Route  path='/cadastro-ativo' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
 
-        <Route path='/cadastro-carteira' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
+        <Route path='/cadastro-carteira/:idParam?' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
         
         <Route  path='/lista-carteiras' element={ <RequireAuth> <ListaCarteiras /> </RequireAuth>  } />  
         

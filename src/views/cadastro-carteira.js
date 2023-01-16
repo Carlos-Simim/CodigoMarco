@@ -8,7 +8,8 @@ import FormGroup from '../components/form-group';
 import { mensagemSucesso } from '../components/toastr';
 import { Link } from "react-router-dom";
 import Navbar from '../components/navbar/navbar';
-import Footer from '../components/footer/footer';
+import Footer from '../components/footer/footer'; 
+
 
 class CadastroCarteira extends React.Component {
 

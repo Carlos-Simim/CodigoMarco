@@ -8,11 +8,17 @@ import axios from 'axios';
 import SeriesChart from '../components/serieschart';
 import Navbar from '../components/navbar/navbar';
 import Footer from '../components/footer/footer';
+import { IconButton } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { mensagemErro, mensagemSucesso } from '../components/toastr';
+import { useNavigate } from 'react-router-dom';
 
 const DetalheCarteira = () => {
 
     const [searchParams] = useSearchParams();
     const [carteira, setCarteira] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get(`${BASE_URL}/carteira?carteira_id=${searchParams.get("carteira_id")}`)
@@ -23,6 +29,21 @@ const DetalheCarteira = () => {
 
     const getTo = (toName) => {
         return window.location.pathname === toName ? true : false
+    }
+
+    function editar(id) {
+        navigate(`/cadastro-ativo/${id}`);
+    }
+
+    function excluir(id){
+        axios.delete(`${BASE_URL}/carteira/${id}`)
+            .then(response => {
+                const carteiraAtualizada = carteira.filter(ativo => ativo.id !== id);
+                setCarteira(carteiraAtualizada);
+                mensagemSucesso('Ativo excluído com sucesso!');
+            }).catch(error => {
+                mensagemErro(error.response.data);
+            })
     }
 
     return (
@@ -102,6 +123,22 @@ const DetalheCarteira = () => {
                                                 <td> {x.rentabilidade}</td>
                                                 <td >{x.dataaquisicao} </td>
                                                 <td >{x.datamodificacao} </td>
+                                                <td >
+                                                    <IconButton
+                                                        aria-label='edit'
+                                                        onClick={() => editar(x.id)}
+                                                    >
+                                                        <EditIcon />
+                                                    </IconButton>
+                                                </td>
+                                                <td>
+                                                    <IconButton
+                                                        aria-label='delete'
+                                                        onClick={() => excluir(x.id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                    </IconButton>
+                                                </td>
                                             </tr>
                                         ))
                                     }
