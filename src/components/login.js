@@ -57,7 +57,7 @@ const FormLogin = () => {
                                                 value={email}
                                                 className='form-control'
                                                 name='email'
-                                                autoComplete="nope"
+                                                autoComplete="off"
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
                                         </FormGroup>
