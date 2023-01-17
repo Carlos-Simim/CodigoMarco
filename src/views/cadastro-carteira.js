@@ -65,7 +65,7 @@ const CadastroCarteira = () => {
                                                 value={nome}
                                                 className='form-control'
                                                 name='nome'
-                                                onChange={(e) => this.setState({ nome: e.target.value })}
+                                                onChange={(e) => setNome(e.target.value)}
                                             />
                                         </FormGroup>
                                         <FormGroup label='Data da criação: *' htmlFor='inputDataDaCriacao'>
@@ -75,7 +75,7 @@ const CadastroCarteira = () => {
                                                 value={datacriacao}
                                                 className='form-control'
                                                 name='dataDaCriacao'
-                                                onChange={(e) => this.setState({ dataDaCriacao: e.target.value })}
+                                                onChange={(e) => setDataCriacao(e.target.value)}
                                             />
                                         </FormGroup>
                                     </div>

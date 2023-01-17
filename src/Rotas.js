@@ -29,13 +29,13 @@ const Rotas = () => {
 
         <Route path='/cadastro-usuarios' element={<CadastroUsuario />} />
 
-        <Route  path='/cadastro-ativo/:idParam?' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
+        <Route  path='/cadastro-ativo' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
 
-        <Route  path='/editar-ativo/:idParam?' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } /> 
+        <Route  path='/editar-ativo/:idParam' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } /> 
 
-        <Route path='/cadastro-carteira/:idParam?' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
+        <Route path='/cadastro-carteira' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
 
-        <Route path='/editar-carteira/:idParam?' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
+        <Route path='/editar-carteira/:idParam' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
         
         <Route  path='/lista-carteiras' element={ <RequireAuth> <ListaCarteiras /> </RequireAuth>  } />  
         

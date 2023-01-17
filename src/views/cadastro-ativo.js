@@ -53,7 +53,6 @@ const CadastroAtivo = () => {
     const [precoUnit, setPrecoUnit] = useState('');
     const [quantidade, setQuantidade] = useState('');
     const [carencia, setCarencia] = useState('');
-    //const [impostos, setImpostos] = useState('');
     const [dataAquisicao, setDataAquisicao] = useState('');
 
     return (

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import { mensagemSucesso } from '../components/toastr';
 
 import { BASE_URL } from "../utils/requests";
 import axios from 'axios';
@@ -38,6 +39,7 @@ const ListaCarteiras = () => {
     }
 
     function excluir(id){
+        mensagemSucesso('Carteira excluída com sucesso!');
         setCarteiras(carteiras.filter( x=> x.id !== id ));
     }
 
