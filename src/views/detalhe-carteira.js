@@ -11,7 +11,6 @@ import Footer from '../components/footer/footer';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { mensagemErro, mensagemSucesso } from '../components/toastr';
 import { useNavigate } from 'react-router-dom';
 
 const DetalheCarteira = () => {
@@ -21,7 +20,7 @@ const DetalheCarteira = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/carteira?carteira_id=${searchParams.get("carteira_id")}`)
+        axios.get(`${BASE_URL}/ativos?carteira_id=${searchParams.get("carteira_id")}`)
             .then(response => {
                 setCarteira(response.data);
             })
@@ -31,19 +30,16 @@ const DetalheCarteira = () => {
         return window.location.pathname === toName ? true : false
     }
 
-    function editar(id) {
-        navigate(`/cadastro-ativo/${id}`);
+    const editar = (id) => {
+        navigate(`/editar-ativo/ativo?ativo_id=${id}`);
     }
 
-    function excluir(id){
-        axios.delete(`${BASE_URL}/carteira/${id}`)
-            .then(response => {
-                const carteiraAtualizada = carteira.filter(ativo => ativo.id !== id);
-                setCarteira(carteiraAtualizada);
-                mensagemSucesso('Ativo excluído com sucesso!');
-            }).catch(error => {
-                mensagemErro(error.response.data);
-            })
+    const excluir = (id) =>{
+        setCarteira(carteira.filter(ativo => ativo.id !== id));
+    }
+
+    const onClickAtivo = (x) => {
+        navigate(`/ativo?ativo_id=${x.id}`);
     }
 
     return (
@@ -111,6 +107,8 @@ const DetalheCarteira = () => {
                                         <th>rentabilidade</th>
                                         <th className="d-none d-sm-table-cell" >Data criação</th>
                                         <th className="d-none d-sm-table-cell" >Data modificação</th>
+                                        <th className="d-none d-sm-table-cell" >Editar</th>
+                                        <th className="d-none d-sm-table-cell" >Deletar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -118,8 +116,8 @@ const DetalheCarteira = () => {
 
                                         carteira?.map(x => (
                                             <tr key={x.id}>
-                                                <td >{x.nome} </td>
-                                                <td >{x.pm} </td>
+                                                <td onClick={() => onClickAtivo(x)} style={{ cursor: "pointer" }} >{x.nome} </td>
+                                                <td >{x.preco} </td>
                                                 <td> {x.rentabilidade}</td>
                                                 <td >{x.dataaquisicao} </td>
                                                 <td >{x.datamodificacao} </td>

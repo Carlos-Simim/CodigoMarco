@@ -4,77 +4,95 @@ import Stack from '@mui/material/Stack';
 
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
-
+import { useNavigate,useSearchParams } from "react-router-dom";
 import { mensagemSucesso } from '../components/toastr';
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Navbar from '../components/navbar/navbar';
-import Footer from '../components/footer/footer'; 
+import Footer from '../components/footer/footer';
+import { BASE_URL } from "../utils/requests";
+import axios from 'axios';
 
 
-class CadastroCarteira extends React.Component {
+const CadastroCarteira = () => {
 
-    state = {
-        nome: '',
-        dataDaCriacao: ''
-    };
+    const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
+    const [nome, setNome] = useState('');
+    const [datacriacao, setDataCriacao] = useState('');
 
-    cadastrar = () => {
-        if (this.state.senha === this.state.senhaRepeticao) {
-            mensagemSucesso(`Carteira ${this.state.nome} cadastrada com sucesso!`);
+    useEffect(() => {
+
+        if (searchParams.get("carteira_id") != null) {
+
+            axios.get(`${BASE_URL}/carteiras/${searchParams.get("carteira_id")}`)
+                .then(response => {
+                    const data = `${response.data.datacriacao.split("/")[2]}-${response.data.datacriacao.split("/")[1]}-${response.data.datacriacao.split("/")[0]}`
+                    setNome(response.data.nome);
+                    setDataCriacao(data);
+                })
+        }
+
+    }, []);
+
+    const cadastrar = () => {
+        if (searchParams.get("carteira_id") == null) {
+            mensagemSucesso(`Carteira ${nome} cadastrada com sucesso!`);
+            navigate("/lista-carteiras");
+        } else {
+            mensagemSucesso(`Carteira ${nome} editada com sucesso!`);
+            navigate("/lista-carteiras");
         }
     };
 
-    cancelar = () => {
-        this.setState({
-            nome: '',
-            dataDaCriacao: ''
-        });
+    const cancelar = () => {
+        navigate("/lista-carteiras");
     };
 
-    getTo = (toName) => {
-        return window.location.pathname === toName ? true : false
-    }
-
-    render() {
-        return (
-            <div className='container'>
-                <Navbar deslogar={true} />
-                <Card title='Cadastro de Carteira'>
-                    <div className='row'>
-                        <div className='col-lg-12'>
-                            <div className='bs-component'>
-                                <FormGroup label='Nome: *' htmlFor='inputNome'>
-                                    <input
-                                        type='text'
-                                        id='inputNome'
-                                        value={this.state.nome}
-                                        className='form-control'
-                                        name='nome'
-                                        onChange={(e) => this.setState({ nome: e.target.value })}
-                                    />
-                                </FormGroup>
-                                <FormGroup label='Data da criação: *' htmlFor='inputDataDaCriacao'>
-                                    <input
-                                        type='date'
-                                        id='inputinputDataDaCriacaoSenha'
-                                        value={this.state.dataDaCriacao}
-                                        className='form-control'
-                                        name='dataDaCriacao'
-                                        onChange={(e) => this.setState({ dataDaCriacao: e.target.value })}
-                                    />
-                                </FormGroup>
+    return (
+        <div className='container'>
+            <Navbar deslogar={true} />
+            <div className='container py-5 h-100'>
+                <div className="row d-flex justify-content-center align-items-center h-100">
+                    <div className="col-12 col-md-8 col-lg-6 col-xl-6">
+                        <Card title={searchParams.get("carteira_id") == null ? 'Cadastro de Carteira' : 'Editar Carteira'} >
+                            <div className='row'>
+                                <div className='col-lg-12'>
+                                    <div className='bs-component'>
+                                        <FormGroup label='Nome: *' htmlFor='inputNome'>
+                                            <input
+                                                type='text'
+                                                id='inputNome'
+                                                value={nome}
+                                                className='form-control'
+                                                name='nome'
+                                                onChange={(e) => this.setState({ nome: e.target.value })}
+                                            />
+                                        </FormGroup>
+                                        <FormGroup label='Data da criação: *' htmlFor='inputDataDaCriacao'>
+                                            <input
+                                                type='date'
+                                                id='inputinputDataDaCriacaoSenha'
+                                                value={datacriacao}
+                                                className='form-control'
+                                                name='dataDaCriacao'
+                                                onChange={(e) => this.setState({ dataDaCriacao: e.target.value })}
+                                            />
+                                        </FormGroup>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
+                                <button className='btn btn-success' onClick={cadastrar} >Salvar</button>
+                                <button className='btn btn-danger' onClick={cancelar} >Cancelar</button>
+                            </Stack>
+                        </Card>
                     </div>
-                    <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
-                        <Link className='btn btn-success' to={this.getTo('/lista-carteiras') ? '#' : '/lista-carteiras'} onClick={this.cadastrar}>Salvar</Link>
-                        <Link className='btn btn-danger' to={this.getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Cancelar</Link>
-                    </Stack>
-                </Card>
-                <Footer />
+                </div>
             </div>
-        );
-    };
+            <Footer />
+        </div>
+    );
+
 
 }
 

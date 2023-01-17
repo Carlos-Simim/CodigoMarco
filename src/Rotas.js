@@ -13,6 +13,7 @@ import CadastroCarteira from './views/cadastro-carteira';
 import ListaCarteiras from './views/lista-carteiras';
 import LoginPage from './views/login';
 import DetalheCarteira from './views/detalhe-carteira';
+import DetalheAtivo from './views/detalhe-ativo';
 
 const Rotas = () => {
 
@@ -28,13 +29,19 @@ const Rotas = () => {
 
         <Route path='/cadastro-usuarios' element={<CadastroUsuario />} />
 
-        <Route  path='/cadastro-ativo' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
+        <Route  path='/cadastro-ativo/:idParam?' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
+
+        <Route  path='/editar-ativo/:idParam?' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } /> 
 
         <Route path='/cadastro-carteira/:idParam?' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
+
+        <Route path='/editar-carteira/:idParam?' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
         
         <Route  path='/lista-carteiras' element={ <RequireAuth> <ListaCarteiras /> </RequireAuth>  } />  
         
         <Route path='/carteira' element={ <RequireAuth>  <DetalheCarteira />  </RequireAuth>  } />      
+
+        <Route path='/ativo' element={ <RequireAuth>  <DetalheAtivo />  </RequireAuth>  } /> 
       
       </Routes>
 

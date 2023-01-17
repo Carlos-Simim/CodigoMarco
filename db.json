@@ -40,119 +40,151 @@
             "datacriacao":"10/11/2022",
             "datamodificacao":"10/11/2022",
             "usuario_id":1
-        }
+        },
+        {
+          "id":4,
+          "nome":"carteira4",
+          "datacriacao":"01/11/2022",
+          "datamodificacao":"1/11/2022",
+          "usuario_id":1
+      }
     ],
-    "carteira":[
+    "ativos":[
         {
             "id":1,
             "nome":"PETR4",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":1
+            "carteira_id":1,
+            "moeda_id":1
         },
         {
             "id":2,
             "nome":"PETR3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":1
+            "carteira_id":1,
+            "moeda_id":1
         },
         {
             "id":3,
             "nome":"SULA11",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":1
+            "carteira_id":1,
+            "moeda_id":1
         },
 
         {
             "id":4,
             "nome":"AMER3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":2
+            "carteira_id":2,
+            "moeda_id":1
         },
         {
             "id":5,
             "nome":"CSNA3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":2
+            "carteira_id":2,
+            "moeda_id":1
         },
         {
             "id":6,
             "nome":"SLCE3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":2
+            "carteira_id":2,
+            "moeda_id":1
         },
 
         {
             "id":7,
             "nome":"LREN3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":3
+            "carteira_id":3,
+            "moeda_id":1
         },
         {
             "id":8,
             "nome":"TOTS3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":4
+            "carteira_id":4,
+            "moeda_id":1
         },
         {
             "id":9,
             "nome":"DXCO3",
-            "pm": 10,
+            "preco": 10,
+            "quantidade":10,
+            "precounitario":20.0,
             "rentabilidade":10.2,
+            "setor":"Ativo Brasil",
             "dataaquisicao":"10/11/2022",
+            "carencia":"10/12/2022",
             "datamodificacao":"15/11/2022",
             "ativo_id":1,
-            "carteira_id":5
-        }
-    ],
-    "ativos":[
-        {
-            "id":1,
-            "nome":"Petrobras",
-            "tipo":"Ação",
-            "moeda_id":1
-        },
-        {
-            "id":2,
-            "nome":"Petrobras",
-            "tipo":"Ação",
-            "moeda_id":1
-        },
-        {
-            "id":3,
-            "nome":"Petrobras",
-            "tipo":"Ação",
+            "carteira_id":5,
             "moeda_id":1
         }
     ],

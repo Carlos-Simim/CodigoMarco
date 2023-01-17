@@ -8,8 +8,6 @@ import { useNavigate } from 'react-router-dom';
 import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { mensagemErro, mensagemSucesso } from '../components/toastr';
-//import { getCarteiras } from '../services/carteiraservice';
 
 import { BASE_URL } from "../utils/requests";
 import axios from 'axios';
@@ -36,18 +34,11 @@ const ListaCarteiras = () => {
     }
 
     function editar(id) {
-        navigate(`/cadastro-carteira/${id}`);
+        navigate(`/editar-carteira/carteira?carteira_id=${id}`);
     }
 
     function excluir(id){
-        axios.delete(`${BASE_URL}/carteiras/${id}`)
-            .then(response => {
-                const carteirasAtualizadas = carteiras.filter(carteira => carteira.id !== id);
-                setCarteiras(carteirasAtualizadas);
-                mensagemSucesso('Carteira excluída com sucesso!');
-            }).catch(error => {
-                mensagemErro(error.response.data);
-            })
+        setCarteiras(carteiras.filter( x=> x.id !== id ));
     }
 
     return (
@@ -63,6 +54,8 @@ const ListaCarteiras = () => {
                                         <th>Nome</th>
                                         <th className="d-none d-sm-table-cell" >Data criação</th>
                                         <th className="d-none d-sm-table-cell" >Data modificação</th>
+                                        <th className="d-none d-sm-table-cell" >Editar</th>
+                                        <th className="d-none d-sm-table-cell" >Deletar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
