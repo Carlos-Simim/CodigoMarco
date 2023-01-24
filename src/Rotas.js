@@ -14,6 +14,7 @@ import ListaCarteiras from './views/lista-carteiras';
 import LoginPage from './views/login';
 import DetalheCarteira from './views/detalhe-carteira';
 import DetalheAtivo from './views/detalhe-ativo';
+import RebalancearCarteira from './views/rebalancear-carteira';
 
 const Rotas = () => {
 
@@ -42,6 +43,8 @@ const Rotas = () => {
         <Route path='/carteira' element={ <RequireAuth>  <DetalheCarteira />  </RequireAuth>  } />      
 
         <Route path='/ativo' element={ <RequireAuth>  <DetalheAtivo />  </RequireAuth>  } /> 
+        
+        <Route path='/rebalancear-carteira' element={ <RequireAuth>  <RebalancearCarteira />  </RequireAuth>  } /> 
       
       </Routes>
 

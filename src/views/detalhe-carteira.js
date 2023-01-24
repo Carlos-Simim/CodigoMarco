@@ -12,6 +12,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
+import { mensagemAlert } from '../components/toastr';
 
 const DetalheCarteira = () => {
 
@@ -40,6 +41,10 @@ const DetalheCarteira = () => {
 
     const onClickAtivo = (x) => {
         navigate(`/ativo?ativo_id=${x.id}`);
+    }
+
+    const mensagemCarteiraExcluida = () => {
+        mensagemAlert("Carteira excluída com sucesso!");
     }
 
     return (
@@ -146,7 +151,9 @@ const DetalheCarteira = () => {
                     </div>
                 </div>
                 <Link style={{ float: 'left' }} className='btn btn-success ms-2' to={getTo('/cadastro-ativo') ? '#' : '/cadastro-ativo'}>Cadastrar Ativo</Link>
-                <Link style={{ float: 'left' }} className='btn btn-primary ms-2' to={getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Carteiras</Link>
+                <Link style={{ float: 'left' }} className='btn btn-success ms-2' to={getTo('/rebalancear-carteira') ? '#' : '/rebalancear-carteira'}>Rebalancear carteira</Link>
+                <Link style={{ float: 'left' }} className='btn btn-primary ms-2' to={getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Voltar</Link>
+                <Link onClick={mensagemCarteiraExcluida} style={{ float: 'right' }} className='btn btn-danger ms-2' to={getTo('/lista-carteiras') ? '#' : '/lista-carteiras'}>Excluir carteira</Link>
             </Card>
 
             <Footer />
