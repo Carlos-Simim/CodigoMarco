@@ -9,6 +9,7 @@ import { IconButton } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { mensagemSucesso } from '../components/toastr';
+import { parseData } from '../utils/requests';
 
 import { BASE_URL } from "../utils/requests";
 import axios from 'axios';
@@ -19,7 +20,7 @@ const ListaCarteiras = () => {
     const [carteiras, setCarteiras] = useState([]);
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/carteiras`)
+        axios.get(`${BASE_URL}/carteira`)
             .then(response => {
                 setCarteiras(response.data);
             })
@@ -65,8 +66,8 @@ const ListaCarteiras = () => {
                                         carteiras?.map(x => (
                                             <tr key={x.id} >
                                                 <td onClick={() => onClickCarteira(x)} style={{ cursor: "pointer" }} >{x.nome} </td>
-                                                <td >{x.datacriacao} </td>
-                                                <td >{x.datamodificacao} </td>
+                                                <td >{parseData(x.dataCriacao)} </td>
+                                                <td >{parseData(x.dataModificacao)} </td>
                                                 <td >
                                                     <IconButton
                                                         aria-label='edit'

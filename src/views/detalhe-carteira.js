@@ -13,6 +13,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useNavigate } from 'react-router-dom';
 import { mensagemAlert } from '../components/toastr';
+import { parseData } from '../utils/requests';
 
 const DetalheCarteira = () => {
 
@@ -21,7 +22,7 @@ const DetalheCarteira = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/ativos?carteira_id=${searchParams.get("carteira_id")}`)
+        axios.get(`${BASE_URL}/ativosAdquiridos/carteira=${searchParams.get("carteira_id")}`)
             .then(response => {
                 setCarteira(response.data);
             })
@@ -110,8 +111,7 @@ const DetalheCarteira = () => {
                                         <th>Nome</th>
                                         <th> Preço médio </th>
                                         <th>rentabilidade</th>
-                                        <th className="d-none d-sm-table-cell" >Data criação</th>
-                                        <th className="d-none d-sm-table-cell" >Data modificação</th>
+                                        <th className="d-none d-sm-table-cell" >Data aquisição</th>
                                         <th className="d-none d-sm-table-cell" >Editar</th>
                                         <th className="d-none d-sm-table-cell" >Deletar</th>
                                     </tr>
@@ -121,12 +121,11 @@ const DetalheCarteira = () => {
 
                                         carteira?.map(x => (
                                             <tr key={x.id}>
-                                                <td onClick={() => onClickAtivo(x)} style={{ cursor: "pointer" }} >{x.nome} </td>
-                                                <td >{x.preco} </td>
-                                                <td> {x.rentabilidade}</td>
-                                                <td >{x.dataaquisicao} </td>
-                                                <td >{x.datamodificacao} </td>
-                                                <td >
+                                                <td onClick={() => onClickAtivo(x)} style={{ cursor: "pointer" }} >{x.ativo.nome} </td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>{parseData(x.dataAquisicao)} </td>
+                                                <td>
                                                     <IconButton
                                                         aria-label='edit'
                                                         onClick={() => editar(x.id)}
