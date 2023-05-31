@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Card from '../components/card';
 
-import { BASE_URL } from "../utils/requests";
+import { BASE_URL, parseData } from "../utils/requests";
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import SeriesChart from '../components/serieschart';
@@ -26,7 +26,7 @@ const DetalheAtivo = () => {
                 setNome(response.data.nome);
                 setPreco(response.data.valor);
                 setQuantidade(response.data.quantidade);
-                setDataAquisicao(response.data.dataaquisicao)
+                setDataAquisicao(response.data.dataAquisicao)
             })
     }, []);
 
@@ -67,7 +67,7 @@ const DetalheAtivo = () => {
                                 </tr>
                                 <tr>
                                     <td > Data Aquisicao </td>
-                                    <td > {dataaquisicao} </td>
+                                    <td > {parseData(dataaquisicao)} </td>
 
                                 </tr>
                                 <tr>

@@ -118,7 +118,7 @@ const DetalheCarteira = () => {
                         onClick={() => onClickAtivo(x)}
                         style={{ cursor: "pointer" }}
                       >
-                        {x.ativo.nome}{" "}
+                        {x.ativoDto.nome}{" "}
                       </td>
                       <td></td>
                       <td></td>
