@@ -17,7 +17,7 @@ const CadastroCarteira = () => {
   const [searchParams] = useSearchParams();
   const [nome, setNome] = useState("");
   const [datacriacao, setDataCriacao] = useState("");
-  const [usuarioProprietarioId, setUsuarioProprietarioId] = useState("");
+  const [usuarioId, setUsuarioId] = useState("");
   useEffect(() => {
     if (searchParams.get("carteira_id") != null) {
       axios
@@ -33,10 +33,10 @@ const CadastroCarteira = () => {
               ? "0" + response.data.dataModificacao[2].toString()
               : response.data.dataModificacao[2].toString();
 
-          const data = `${response.data.dataModificacao[0]}-${month}-${day}`;
+          const data = `${year}-${month}-${day}`;
           setNome(response.data.nome);
           setDataCriacao(data);
-          setUsuarioProprietarioId(response.data.usuarioProprietarioId);
+          setUsuarioId(response.data.usuarioId);
         });
     }
   }, []);
@@ -46,7 +46,7 @@ const CadastroCarteira = () => {
       axios
         .post(`${BASE_URL}/carteira`, {
           nome: nome,
-          usuarioProprietarioId: 2,
+          usuarioId: 1,
         })
         .then((response) => {
           mensagemSucesso(`Carteira ${nome} cadastrada com sucesso!`);
@@ -57,7 +57,7 @@ const CadastroCarteira = () => {
         .put(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`, {
           nome: nome,
           dataModificacao: datacriacao + "T00:00:00.000Z",
-          usuarioProprietarioId: usuarioProprietarioId,
+          usuarioId: usuarioId,
         })
         .then((response) => {
           mensagemSucesso(`Carteira ${nome} editada com sucesso!`);
