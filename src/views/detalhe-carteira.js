@@ -26,8 +26,6 @@ const DetalheCarteira = () => {
         `${BASE_URL}/ativoadquirido/carteira=${searchParams.get("carteira_id")}`
       )
       .then((response) => {
-        console.log(response.data);
-
         setCarteira(response.data);
       });
   }, []);
