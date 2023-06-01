@@ -38,7 +38,7 @@ const RebalancearCarteira = () => {
 
     return (
         <>
-            <Navbar title="Gerenciador de investimentos" deslogar={true} listarAtivos={true}/>
+            <Navbar title="Gerenciador de investimentos" />
             <div className='container py-5 h-100'>
                 <div className="row d-flex justify-content-center align-items-center h-100">
                     <div className="col-7">

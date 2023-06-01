@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import Card from '../components/card';
 
-import { BASE_URL } from "../utils/requests";
+import { BASE_URL, parseData } from "../utils/requests";
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import SeriesChart from '../components/serieschart';
@@ -21,13 +21,12 @@ const DetalheAtivo = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`${BASE_URL}/ativos/${searchParams.get("ativo_id")}`)
+        axios.get(`${BASE_URL}/ativoadquirido/${searchParams.get("ativo_id")}`)
             .then(response => {
-
                 setNome(response.data.nome);
-                setPreco(response.data.preco);
+                setPreco(response.data.valor);
                 setQuantidade(response.data.quantidade);
-                setDataAquisicao(response.data.dataaquisicao)
+                setDataAquisicao(response.data.dataAquisicao)
             })
     }, []);
 
@@ -68,7 +67,7 @@ const DetalheAtivo = () => {
                                 </tr>
                                 <tr>
                                     <td > Data Aquisicao </td>
-                                    <td > {dataaquisicao} </td>
+                                    <td > {parseData(dataaquisicao)} </td>
 
                                 </tr>
                                 <tr>
@@ -78,7 +77,7 @@ const DetalheAtivo = () => {
                                 </tr>
                                 <tr>
                                     <td >Total </td>
-                                    <td > R$ 15000.0 </td>
+                                    <td > R$ {quantidade * preco} </td>
                                 </tr>
 
                             </tbody>

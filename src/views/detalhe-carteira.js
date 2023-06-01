@@ -26,8 +26,6 @@ const DetalheCarteira = () => {
         `${BASE_URL}/ativoadquirido/carteira=${searchParams.get("carteira_id")}`
       )
       .then((response) => {
-        console.log(response.data);
-
         setCarteira(response.data);
       });
   }, []);
@@ -54,7 +52,7 @@ const DetalheCarteira = () => {
 
   return (
     <div className="container" style={{ marginBottom: 150 }}>
-      <Navbar title="Analizador de carteira" deslogar={true} listarAtivos={true}/>
+      <Navbar title="Analizador de carteira" deslogar={true} />
       <Card title="Detalhes Carteira">
         <div className="row">
           <div className="col-sm-6 mb-2">
@@ -120,7 +118,7 @@ const DetalheCarteira = () => {
                         onClick={() => onClickAtivo(x)}
                         style={{ cursor: "pointer" }}
                       >
-                        {x.ativo.nome}{" "}
+                        {x.ativoDto.nome}{" "}
                       </td>
                       <td></td>
                       <td></td>
