@@ -17,7 +17,7 @@ const ListaAtivos = () => {
     const navigate = useNavigate();
     const [ativos, setAtivos] = useState([]);
     const [searchParams] = useSearchParams();
-    const [isFromCarteira, setIsFromCarteira] = useState(true);
+    const [isFromCarteira, setIsFromCarteira] = useState(false);
 
 
     useEffect(() => {

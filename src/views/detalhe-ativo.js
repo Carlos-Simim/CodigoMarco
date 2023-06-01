@@ -36,7 +36,7 @@ const DetalheAtivo = () => {
 
     return (
         <div className='container' style={{ marginBottom: 150 }}>
-            <Navbar title={nome} deslogar={true} />
+            <Navbar title={nome} deslogar={true} listarAtivos={true} />
             <Card title='Detalhes do Ativo'>
                 <div className="row">
 
