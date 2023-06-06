@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'http://localhost:8000/api/v1';
+export const BASE_URL = process.env.REACT_APP_BACKEND_URL ?? 'https://lp3-backend.herokuapp.com/api/v1';
 
 export function parseData(data){
     var ano = data.toString().split(',')[0];
