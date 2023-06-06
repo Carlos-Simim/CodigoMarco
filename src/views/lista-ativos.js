@@ -17,13 +17,9 @@ const ListaAtivos = () => {
     const navigate = useNavigate();
     const [ativos, setAtivos] = useState([]);
     const [searchParams] = useSearchParams();
-    const [isFromCarteira, setIsFromCarteira] = useState(false);
 
 
-    useEffect(() => {
-        if (searchParams.has("carteira_id")) {
-            setIsFromCarteira(true);
-        }
+    useEffect(() => {        
         axios
             .get(`${BASE_URL}/ativo`)
             .then((response) => {
@@ -57,52 +53,13 @@ const ListaAtivos = () => {
                                     <tr>
                                         <th>Nome</th>
                                         <th className="d-none d-sm-table-cell">Tipo</th>
-                                        {isFromCarteira ? (
-                                            <>
-                                                <th className="d-none d-sm-table-cell">Selecionar</th>
-                                            </>) : (
-                                            <>
-                                                <th className="d-none d-sm-table-cell">Editar</th>
-                                                <th className="d-none d-sm-table-cell">Deletar</th>
-
-                                            </>
-                                        )}
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {ativos.map((ativo) => (
                                         <tr key={ativo.id}>
                                             <td>{ativo.nome}</td>
-                                            <td>{ativo.tipo}</td>
-                                            {isFromCarteira ? (
-                                                <td>
-                                                    <IconButton
-                                                        aria-label="add"
-                                                        onClick={() => selecionarAtivo(ativo.id)}
-                                                    >
-                                                        <AddIcon />
-                                                    </IconButton>
-                                                </td>
-                                            ) : (
-                                                <>
-                                                    <td>
-                                                        <IconButton
-                                                            aria-label="edit"
-                                                            onClick={() => editarAtivo(ativo.id)}
-                                                        >
-                                                            <EditIcon />
-                                                        </IconButton>
-                                                    </td>
-                                                    <td>
-                                                        <IconButton
-                                                            aria-label="delete"
-                                                            onClick={() => excluirAtivo(ativo.id)}
-                                                        >
-                                                            <DeleteIcon />
-                                                        </IconButton>
-                                                    </td>
-                                                </>
-                                            )}
+                                            <td>{ativo.tipo}</td>                                            
                                         </tr>
                                     ))}
                                 </tbody>
