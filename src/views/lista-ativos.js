@@ -25,7 +25,7 @@ const ListaAtivos = () => {
             setIsFromCarteira(true);
         }
         axios
-            .get(`${BASE_URL}/ativos`)
+            .get(`${BASE_URL}/ativo`)
             .then((response) => {
                 setAtivos(response.data);
             });
