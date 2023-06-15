@@ -9,6 +9,7 @@ import CadastroUsuario from './views/cadastro-usuario';
 
 import { Route, Routes, Navigate } from 'react-router-dom';
 import CadastroAtivo from './views/cadastro-ativo';
+import CadastroAtivoAdquirido from './views/cadastro-ativo-adquirido';
 import CadastroCarteira from './views/cadastro-carteira';
 import ListaCarteiras from './views/lista-carteiras';
 import ListaAtivos from './views/lista-ativos';
@@ -32,12 +33,16 @@ const Rotas = () => {
         <Route path='/cadastro-usuarios' element={<CadastroUsuario />} />
 
         <Route  path='/cadastro-ativo' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } />  
+        
+        <Route  path='/cadastro-ativo-adquirido' element={ <RequireAuth> <CadastroAtivoAdquirido /> </RequireAuth>  } />  
 
         <Route  path='/editar-ativo/:idParam' element={ <RequireAuth> <CadastroAtivo /> </RequireAuth>  } /> 
 
         <Route path='/cadastro-carteira' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
 
         <Route path='/editar-carteira/:idParam' element={ <RequireAuth>  <CadastroCarteira />  </RequireAuth>  } />
+        
+        <Route path='/editar-ativo/:idParam' element={ <RequireAuth>  <CadastroAtivo />  </RequireAuth>  } />
         
         <Route  path='/lista-carteiras' element={ <RequireAuth> <ListaCarteiras /> </RequireAuth>  } />  
 

@@ -14,6 +14,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
 import { mensagemAlert } from "../components/toastr";
 import { parseData } from "../utils/requests";
+import { mensagemSucesso } from "../components/toastr";
 
 const DetalheCarteira = () => {
   const [searchParams] = useSearchParams();
@@ -35,19 +36,18 @@ const DetalheCarteira = () => {
   };
 
   const editar = (id) => {
-    navigate(`/editar-ativo/ativo?ativo_id=${id}`);
+    navigate(`/cadastro-ativo-adquirido?carteira_id=${searchParams.get("carteira_id")}&ativo_adquirido_id=${id}`);
   };
 
-  const excluir = (id) => {
-    setCarteira(carteira.filter((ativo) => ativo.id !== id));
+  const excluir = (id) => {    
+    axios.delete(`${BASE_URL}/ativoadquirido/${id}`).then((response) => {
+      mensagemSucesso("Ativo adquirido excluída com sucesso!");
+      setCarteira(carteira.filter((ativo) => ativo.id !== id));
+    });
   };
 
   const onClickAtivo = (x) => {
     navigate(`/ativo?ativo_id=${x.id}`);
-  };
-
-  const mensagemCarteiraExcluida = () => {
-    mensagemAlert("Carteira excluída com sucesso!");
   };
 
   return (
@@ -96,7 +96,7 @@ const DetalheCarteira = () => {
           </div>
         </div>
       </Card>
-      <Card title="Ativos">
+      <Card title="Ativos Adquiridos">
         <div className="row">
           <div className="col-sm-12 mb-2">
             <div className="bs-component">
@@ -104,7 +104,7 @@ const DetalheCarteira = () => {
                 <thead>
                   <tr>
                     <th>Nome</th>
-                    <th> Preço médio </th>
+                    <th> Preço unitário </th>
                     <th>rentabilidade</th>
                     <th className="d-none d-sm-table-cell">Data aquisição</th>
                     <th className="d-none d-sm-table-cell">Editar</th>
@@ -120,7 +120,7 @@ const DetalheCarteira = () => {
                       >
                         {x.ativoDto.nome}{" "}
                       </td>
-                      <td></td>
+                      <td>R${x.valor}</td>
                       <td></td>
                       <td>{parseData(x.dataAquisicao)} </td>
                       <td>
@@ -149,9 +149,9 @@ const DetalheCarteira = () => {
         <Link
           style={{ float: "left" }}
           className="btn btn-success ms-2"
-          to={getTo("/cadastro-ativo") ? "#" : "/cadastro-ativo"}
+          to={`/cadastro-ativo-adquirido?carteira_id=${searchParams.get("carteira_id")}`}
         >
-          Cadastrar Ativo
+          Cadastrar Ativo Adquirido
         </Link>
         <Link
           style={{ float: "left" }}
@@ -166,15 +166,7 @@ const DetalheCarteira = () => {
           to={getTo("/lista-carteiras") ? "#" : "/lista-carteiras"}
         >
           Voltar
-        </Link>
-        <Link
-          onClick={mensagemCarteiraExcluida}
-          style={{ float: "right" }}
-          className="btn btn-danger ms-2"
-          to={getTo("/lista-carteiras") ? "#" : "/lista-carteiras"}
-        >
-          Excluir carteira
-        </Link>
+        </Link>        
       </Card>
 
       <Footer />

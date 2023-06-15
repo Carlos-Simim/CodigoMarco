@@ -19,44 +19,40 @@ const CadastroAtivo = () => {
   useEffect(() => {
     if (searchParams.get("ativo_id") != null) {
       axios
-        .get(`${BASE_URL}/ativoadquirido/${searchParams.get("ativo_id")}`)
+        .get(`${BASE_URL}/ativo/${searchParams.get("ativo_id")}`)
         .then((response) => {
-          console.log(response.data);
           setNome(response.data.nome);
-          setSetor(response.data.setor);
-          setPrecoUnit(response.data.precounitario);
-          setQuantidade(response.data.quantidade);
-
-          setCarencia(
-            `${response.data.carencia.split("/")[2]}-${
-              response.data.carencia.split("/")[1]
-            }-${response.data.carencia.split("/")[0]}`
-          );
-          setDataAquisicao(
-            `${response.data.dataaquisicao.split("/")[2]}-${
-              response.data.dataaquisicao.split("/")[1]
-            }-${response.data.dataaquisicao.split("/")[0]}`
-          );
+          setTipo(response.data.tipo);
         });
     }
   }, []);
 
   const cadastrar = () => {
     if (searchParams.get("ativo_id") == null) {
-      mensagemSucesso(`Ativo ${nome} cadastrado com sucesso!`);
+      axios
+        .post(`${BASE_URL}/ativo`, {
+          nome: nome,
+          tipo: tipo,
+        })
+        .then((response) => {
+          mensagemSucesso(`Ativo ${nome} cadastrada com sucesso!`);
+          navigate("/lista-ativos");
+        });
     } else {
-      mensagemSucesso(`Ativo ${nome} editado com sucesso!`);
+      axios
+        .put(`${BASE_URL}/ativo/${searchParams.get("ativo_id")}`, {
+          nome: nome,
+          tipo: tipo,
+        })
+        .then((response) => {
+          mensagemSucesso(`Ativo ${nome} editado com sucesso!`);
+          navigate("/lista-ativos");
+        });
     }
-    navigate(-1);
   };
 
   const [nome, setNome] = useState("");
-  const [setor, setSetor] = useState("");
-
-  const [precoUnit, setPrecoUnit] = useState("");
-  const [quantidade, setQuantidade] = useState("");
-  const [carencia, setCarencia] = useState("");
-  const [dataAquisicao, setDataAquisicao] = useState("");
+  const [tipo, setTipo] = useState("");
 
   return (
     <div className="container">
@@ -84,65 +80,16 @@ const CadastroAtivo = () => {
                         onChange={(e) => setNome(e.target.value)}
                       />
                     </FormGroup>
-                    <FormGroup label="Setor: *" htmlFor="inputSetor">
+                    <FormGroup label="Tipo: *" htmlFor="inputTipo">
                       <input
                         type="text"
-                        id="inputSetor"
-                        value={setor}
+                        id="inputTipo"
+                        value={tipo}
                         className="form-control"
-                        name="setor"
-                        onChange={(e) => setSetor(e.target.value)}
+                        name="tipo"
+                        onChange={(e) => setTipo(e.target.value)}
                       />
-                    </FormGroup>
-                    <FormGroup
-                      label="Preço Unitário: *"
-                      htmlFor="inputPrecoUnitario"
-                    >
-                      <input
-                        type="number"
-                        id="inputPrecoUnitario"
-                        value={precoUnit}
-                        className="form-control"
-                        name="precoUnitario"
-                        onChange={(e) => setPrecoUnit(e.target.value)}
-                      />
-                    </FormGroup>
-                    <FormGroup label="Quantidade: *" htmlFor="inputQuantidade">
-                      <input
-                        type="number"
-                        id="inputQuantidade"
-                        value={quantidade}
-                        className="form-control"
-                        name="quantidade"
-                        onChange={(e) => setQuantidade(e.target.value)}
-                      />
-                    </FormGroup>
-                    <FormGroup
-                      label="Data Final da Carência:"
-                      htmlFor="inputCarencia"
-                    >
-                      <input
-                        type="date"
-                        id="inputCarencia"
-                        value={carencia}
-                        className="form-control"
-                        name="carencia"
-                        onChange={(e) => setCarencia(e.target.value)}
-                      />
-                    </FormGroup>
-                    <FormGroup
-                      label="Data de Aquisição: "
-                      htmlFor="inputDataAquisicao"
-                    >
-                      <input
-                        type="date"
-                        id="inputDataAquisicao"
-                        value={dataAquisicao}
-                        className="form-control"
-                        name="dataAquisicao"
-                        onChange={(e) => setDataAquisicao(e.target.value)}
-                      />
-                    </FormGroup>
+                    </FormGroup>                  
                   </div>
                 </div>
               </div>

@@ -40,7 +40,6 @@ const ListaCarteiras = () => {
   }
 
   function excluir(id) {
-    console.log(id);
     axios.delete(`${BASE_URL}/carteira/${id}`).then((response) => {
       mensagemSucesso("Carteira excluída com sucesso!");
       setCarteiras(carteiras.filter((x) => x.id !== id));

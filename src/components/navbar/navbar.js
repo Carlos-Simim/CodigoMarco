@@ -37,7 +37,7 @@ const Navbar = (props) => {
 
           {props?.listarAtivos ? (
             <Link
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", marginRight: 10 }}
               className="btn btn-outline-secondary my-2 my-sm-0"
               to={getTo("/lista-ativos") ? "#" : "/lista-ativos"}
             >

@@ -27,19 +27,16 @@ const ListaAtivos = () => {
             });
     }, []);
 
-    const editarAtivo = (id) => {
-        navigate(`/editar-ativo?ativo_id=${id}`);
-    };
-    const selecionarAtivo = (id) => {
-        //
-    };
-
     const excluirAtivo = (id) => {
-        axios.delete(`${BASE_URL}/ativos/${id}`).then((response) => {
+        axios.delete(`${BASE_URL}/ativo/${id}`).then((response) => {
             mensagemSucesso("Ativo excluído com sucesso!");
             setAtivos(ativos.filter((ativo) => ativo.id !== id));
         });
     };
+
+    function editar(id) {
+        navigate(`/editar-ativo/ativo?ativo_id=${id}`);
+    }
 
     return (
         <div className="container" style={{ marginBottom: 150 }}>
@@ -53,49 +50,57 @@ const ListaAtivos = () => {
                                     <tr>
                                         <th>Nome</th>
                                         <th className="d-none d-sm-table-cell">Tipo</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {ativos.map((ativo) => (
                                         <tr key={ativo.id}>
                                             <td>{ativo.nome}</td>
-                                            <td>{ativo.tipo}</td>                                            
+                                            <td>{ativo.tipo}</td> 
+                                            <td>
+                                                <IconButton
+                                                aria-label="edit"
+                                                onClick={() => editar(ativo.id)}
+                                                >
+                                                <EditIcon />
+                                                </IconButton>
+                                            </td>
+                                            <td>
+                                                <IconButton
+                                                aria-label="delete"
+                                                onClick={() => excluirAtivo(ativo.id)}
+                                                >
+                                                <DeleteIcon />
+                                                </IconButton>
+                                            </td>                                           
                                         </tr>
                                     ))}
                                 </tbody>
                             </table>
                         </div>
                     </div>
-                </div>
-                {isFromCarteira ? (
-                    <>
-                        <button
-                            onClick={() => navigate(-1)}
-                            type="button"
-                            className="btn btn-danger"
-                        >
-                            Voltar
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <button
-                            onClick={() => navigate(-1)}
-                            type="button"
-                            className="btn btn-danger"
-                        >
-                            Voltar
-                        </button>
-                        <Link
-                            style={{ float: "right" }}
-                            className="btn btn-success"
-                            to="/cadastro-ativo"
-                        >
-                            Cadastrar Ativo
-                        </Link>
+                </div>                
+                <>
+                    <button
+                        onClick={() => navigate(-1)}
+                        type="button"
+                        className="btn btn-danger"
+                    >
+                        Voltar
+                    </button>
+                </>
+                <>                    
+                    <Link
+                        style={{ float: "right" }}
+                        className="btn btn-success"
+                        to="/cadastro-ativo"
+                    >
+                        Cadastrar Ativo
+                    </Link>
 
-                    </>
-                )}
+                </>
             </Card>
         </div>
     );

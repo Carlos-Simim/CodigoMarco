@@ -50,8 +50,8 @@ const DetalheAtivo = () => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td >Preço médio </td>
-                                    <td > {preco} </td>
+                                    <td >Preço unitário </td>
+                                    <td > R${preco} </td>
 
                                 </tr>
 
