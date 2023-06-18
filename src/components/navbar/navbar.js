@@ -29,7 +29,7 @@ const Navbar = (props) => {
     <div className='navbar fixed-top rounded border-dark bg-black'>
       <div className='container'>
 
-        <h2 className='navbar-brand text-white'> {props?.title} </h2>
+        <h2 className='navbar-brand text-white'> Gerenciador de carteiras </h2>
 
 
 

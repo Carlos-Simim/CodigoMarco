@@ -20,7 +20,6 @@ const FormLogin = () => {
         doLogin(email,password)
         .then(response => {
             localStorage.setItem('token', response.token);
-            mensagemSucesso('Login realizado com sucesso!');
             setEmail('');
             setPassword('')
             navigate('/lista-carteiras');

@@ -48,7 +48,7 @@ const ListaCarteiras = () => {
 
   return (
     <div className="container">
-      <Navbar title="Gerenciador de investimentos" deslogar={true} listarAtivos={true} />
+      <Navbar title="Gerenciador de carteiras" deslogar={true} listarAtivos={true} />
       <Card title="Carteiras">
         <div className="row">
           <div className="col-lg-12">

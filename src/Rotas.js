@@ -15,8 +15,9 @@ import ListaCarteiras from './views/lista-carteiras';
 import ListaAtivos from './views/lista-ativos';
 import LoginPage from './views/login';
 import DetalheCarteira from './views/detalhe-carteira';
-import DetalheAtivo from './views/detalhe-ativo';
+import DetalheAtivo from './views/detalhe-ativo-adquirido';
 import RebalancearCarteira from './views/rebalancear-carteira';
+import DetalheAtivoAdquirido from './views/detalhe-ativo-adquirido';
 
 const Rotas = () => {
 
@@ -50,7 +51,7 @@ const Rotas = () => {
         
         <Route path='/carteira' element={ <RequireAuth>  <DetalheCarteira />  </RequireAuth>  } />      
 
-        <Route path='/ativo' element={ <RequireAuth>  <DetalheAtivo />  </RequireAuth>  } /> 
+        <Route path='/ativo' element={ <RequireAuth>  <DetalheAtivoAdquirido />  </RequireAuth>  } /> 
         
         <Route path='/rebalancear-carteira' element={ <RequireAuth>  <RebalancearCarteira />  </RequireAuth>  } /> 
       

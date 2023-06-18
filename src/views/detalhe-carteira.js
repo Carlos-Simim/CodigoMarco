@@ -52,7 +52,7 @@ const DetalheCarteira = () => {
 
   return (
     <div className="container" style={{ marginBottom: 150 }}>
-      <Navbar title="Analizador de carteira" deslogar={true} listarAtivos={true}/>
+      <Navbar title="Gerenciador de carteiras" deslogar={true} listarAtivos={true}/>
       <Card title="Detalhes Carteira">
         <div className="row">
           <div className="col-sm-6 mb-2">
