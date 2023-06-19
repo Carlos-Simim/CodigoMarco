@@ -108,6 +108,7 @@ const CadastroAtivoAdquirido = () => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="bs-component">                
+                  <label htmlFor="ativo">Ativo</label>
                   <select
                     value={ativoId}
                     onChange={(e) => setAtivoId(e.target.value)}

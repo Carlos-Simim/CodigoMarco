@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { parseData } from '../utils/requests';
 
-class TabelaHistoricoPrecos extends React.Component {
-    render() {
+const TabelaHistoricoPrecos = (props) => {
+
+        var historicoPrecos = props.historicoPrecos;
+
         return (
             <table className="table table-striped">
                 <thead>
@@ -10,19 +13,16 @@ class TabelaHistoricoPrecos extends React.Component {
                         <th scope="col">Valor</th>
                     </tr>
                 </thead>
-                <tbody>                    
-                    <tr>
-                        <td>15/05/2023</td>
-                        <td>R$25,15</td>
-                    </tr>
-                    <tr>
-                        <td>16/05/2023</td>
-                        <td>R$25,26</td>
-                    </tr>                    
+                <tbody>                     
+                    {historicoPrecos.map((x) => (
+                        <tr key={x.id}>
+                            <td>{parseData(x.data)}</td>
+                            <td>R${x.valor}</td>
+                        </tr>
+                    ))}                    
                 </tbody>
             </table>
-        )
-    }
+        );
 }
 
 export default TabelaHistoricoPrecos;

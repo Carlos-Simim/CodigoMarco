@@ -60,33 +60,33 @@ const DetalheCarteira = () => {
               <thead>
                 <tr>
                   <th>Indicador</th>
-                  <th> Valor </th>
+                  <th>Valor</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Beta </td>
-                  <td> 0.74 </td>
+                  <td>Beta</td>
+                  <td>placeholder</td>
                 </tr>
                 <tr>
-                  <td>Volatilidade </td>
-                  <td> 1.74 </td>
+                  <td>Volatilidade</td>
+                  <td>placeholder</td>
                 </tr>
                 <tr>
-                  <td>Risco </td>
-                  <td> 3.54 </td>
+                  <td>Risco</td>
+                  <td>placeholder</td>
                 </tr>
                 <tr>
-                  <td>Retorno </td>
-                  <td> 7.5 % </td>
+                  <td>Retorno</td>
+                  <td>placeholder</td>
                 </tr>
                 <tr>
-                  <td>P/L </td>
-                  <td> 0.98 </td>
+                  <td>P/L</td>
+                  <td>placeholder</td>
                 </tr>
                 <tr>
-                  <td>Total </td>
-                  <td> R$ 15000.0 </td>
+                  <td>Total</td>
+                  <td>placeholder</td>
                 </tr>
               </tbody>
             </table>
@@ -121,7 +121,7 @@ const DetalheCarteira = () => {
                         {x.ativoDto.nome}{" "}
                       </td>
                       <td>R${x.valor}</td>
-                      <td></td>
+                      <td>placeholder</td>
                       <td>{parseData(x.dataAquisicao)} </td>
                       <td>
                         <IconButton

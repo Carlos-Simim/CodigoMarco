@@ -29,9 +29,7 @@ const Navbar = (props) => {
     <div className='navbar fixed-top rounded border-dark bg-black'>
       <div className='container'>
 
-        <h2 className='navbar-brand text-white'> Gerenciador de carteiras </h2>
-
-
+        <h2 className='navbar-brand text-white' onClick={() => navigate("/lista-carteiras")} style={{ cursor: 'pointer' }}> Gerenciador de carteiras </h2>
 
         <div className="button-group">
 
@@ -57,19 +55,6 @@ const Navbar = (props) => {
                 </button>
               ) : ''};
         </div>
-
-        {/* <button
-          className='navbar-toggler'
-          type='button'
-          data-toggle='collapse'
-          data-target='#navbarResponsive'
-          aria-controls='navbarResponsive'
-          aria-expanded='false'
-          aria-label='Toggle navigation'
-        >
-          <span className='navbar-toggler-icon'></span>
-        </button> */}
-
       </div>
     </div>
   );
