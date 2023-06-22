@@ -56,7 +56,7 @@ const CadastroCarteira = () => {
       axios
         .put(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`, {
           nome: nome,
-          dataModificacao: datacriacao + "T00:00:00.000Z",
+          dataCriacao: datacriacao + "T00:00:00.000Z",
           usuarioId: usuarioId,
         })
         .then((response) => {

@@ -42,7 +42,7 @@ const CadastroAtivoAdquirido = () => {
           ativoId: ativoId,
           valor: valor,
           quantidade: quantidade,
-          //dataAquisicao: dataAquisicao,
+          dataAquisicao: dataAquisicao + "T00:00:00.000Z",
           carteiraId: searchParams.get("carteira_id")
         })
         .then((response) => {
@@ -54,7 +54,7 @@ const CadastroAtivoAdquirido = () => {
           ativoId: ativoId,
           valor: valor,
           quantidade: quantidade,
-          //dataAquisicao: dataAquisicao,
+          dataAquisicao: dataAquisicao + "T00:00:00.000Z",
           carteiraId: searchParams.get("carteira_id")
         })
         .then((response) => {
@@ -101,8 +101,8 @@ const CadastroAtivoAdquirido = () => {
             <Card
               title={
                 searchParams.get("ativo_adquirido_id") == null
-                  ? "Cadastro de Ativo"
-                  : "Editar Ativo"
+                  ? "Cadastro de Ativo Adquirido"
+                  : "Editar Ativo Adquirido"
               }
             >
               <div className="row">

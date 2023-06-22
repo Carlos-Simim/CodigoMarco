@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Card from "../components/card";
 import FormGroup from "../components/form-group";
 import { useState, useEffect } from "react";
-import { mensagemSucesso } from "../components/toastr";
+import { mensagemErro, mensagemSucesso } from "../components/toastr";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
 import Footer from "../components/footer/footer";
@@ -37,6 +37,9 @@ const CadastroAtivo = () => {
         .then((response) => {
           mensagemSucesso(`Ativo ${nome} cadastrada com sucesso!`);
           navigate("/lista-ativos");
+        })
+        .catch((error) => {
+          mensagemErro(error.response.data);
         });
     } else {
       axios
@@ -47,6 +50,9 @@ const CadastroAtivo = () => {
         .then((response) => {
           mensagemSucesso(`Ativo ${nome} editado com sucesso!`);
           navigate("/lista-ativos");
+        })
+        .catch((error) => {
+          mensagemErro(error.response.data);
         });
     }
   };
