@@ -5,7 +5,7 @@ import Stack from '@mui/material/Stack';
 import Card from '../components/card';
 import FormGroup from '../components/form-group';
 import { doLogin } from '../services/authservice';
-import { mensagemSucesso, mensagemErro } from '../components/toastr';
+import { mensagemErro } from '../components/toastr';
 import {  Link,useNavigate  } from "react-router-dom";
 
 const FormLogin = () => {
@@ -15,20 +15,18 @@ const FormLogin = () => {
 
     const navigate = useNavigate();
 
-    const logar = () => {
-        
+    const logar = () => {        
         doLogin(email,password)
         .then(response => {
             localStorage.setItem('token', response.token);
+            localStorage.setItem('email', response.login);
             setEmail('');
             setPassword('')
             navigate('/lista-carteiras');
         })
         .catch(err => {
             console.log(err.message);
-            setEmail('');
-            setPassword('')
-            mensagemErro(err.message)
+            mensagemErro("Email ou senha inválidos!");
         })
 
         

@@ -18,25 +18,32 @@ const CadastroCarteira = () => {
   const [nome, setNome] = useState("");
   const [datacriacao, setDataCriacao] = useState("");
   const [usuarioId, setUsuarioId] = useState("");
+  const email = localStorage.getItem("email");
   useEffect(() => {
     if (searchParams.get("carteira_id") != null) {
       axios
         .get(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`)
         .then((response) => {
-          const year = response.data.dataModificacao[0];
+          const year = response.data.dataCriacao[0];
           const month =
-            response.data.dataModificacao[1].toString().length === 1
-              ? "0" + response.data.dataModificacao[1].toString()
-              : response.data.dataModificacao[1].toString();
+            response.data.dataCriacao[1].toString().length === 1
+              ? "0" + response.data.dataCriacao[1].toString()
+              : response.data.dataCriacao[1].toString();
           const day =
-            response.data.dataModificacao[2].toString().length === 1
-              ? "0" + response.data.dataModificacao[2].toString()
-              : response.data.dataModificacao[2].toString();
+            response.data.dataCriacao[2].toString().length === 1
+              ? "0" + response.data.dataCriacao[2].toString()
+              : response.data.dataCriacao[2].toString();
 
           const data = `${year}-${month}-${day}`;
           setNome(response.data.nome);
           setDataCriacao(data);
           setUsuarioId(response.data.usuarioId);
+        });
+    }else{
+      axios
+        .post(`${BASE_URL}/usuario/token`, {login: email})
+        .then((response) => {
+          setUsuarioId(response.data);
         });
     }
   }, []);
@@ -46,7 +53,8 @@ const CadastroCarteira = () => {
       axios
         .post(`${BASE_URL}/carteira`, {
           nome: nome,
-          usuarioId: 1,
+          dataCriacao: datacriacao + "T00:00:00.000Z",
+          usuarioId: usuarioId
         })
         .then((response) => {
           mensagemSucesso(`Carteira ${nome} cadastrada com sucesso!`);

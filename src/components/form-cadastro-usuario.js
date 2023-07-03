@@ -8,6 +8,8 @@ import FormGroup from '../components/form-group';
 import { mensagemSucesso } from '../components/toastr';
 import { mensagemErro } from '../components/toastr';
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { BASE_URL } from "../utils/requests";
 
 class FormCadastroUsuario extends React.Component {
   state = {
@@ -19,12 +21,33 @@ class FormCadastroUsuario extends React.Component {
   };
 
   cadastrar = () => {
-    if (this.state.senha === this.state.senhaRepeticao) {
-      mensagemSucesso(`Usuário ${this.state.nome} cadastrado com sucesso!`);
+    if (this.state.senha !== this.state.senhaRepeticao) {
+      mensagemErro('As senhas informadas são diferentes.');
+      return false;
     }
-    else {
-      mensagemErro('As senhas informadas são diferentes.')
-    }
+    axios.post(`${BASE_URL}/usuario`, {
+      nome: this.state.nome,
+      telefone: this.state.celular,
+      email: this.state.email,
+      login: this.state.email,
+      senha: this.state.senha,
+      admin: false
+    })
+      .then(response => {
+        mensagemSucesso('Usuário cadastrado com sucesso!');
+        this.setState({
+          nome: '',
+          celular: '',
+          email: '',
+          senha: '',
+          senhaRepeticao: '',
+        });
+      }
+      )
+      .catch(error => {
+        mensagemErro(error.response.data);
+      }
+      );
   };
 
   getTo = (toName) => {
@@ -98,7 +121,7 @@ class FormCadastroUsuario extends React.Component {
                       />
                     </FormGroup>
                     <Stack spacing={1} direction='row' style={{ marginTop: '20px' }}>
-                      <Link className='btn btn-success' to={this.getTo('/') ? '#' : '/'} onClick={this.cadastrar}>Salvar</Link>
+                      <Link className='btn btn-success' onClick={this.cadastrar}>Salvar</Link>
                       <Link className='btn btn-danger' to={this.getTo('/') ? '#' : '/'}>Cancelar</Link>
                     </Stack>
                   </div>

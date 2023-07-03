@@ -5,7 +5,7 @@ import Stack from "@mui/material/Stack";
 import Card from "../components/card";
 import FormGroup from "../components/form-group";
 import { useState, useEffect } from "react";
-import { mensagemSucesso } from "../components/toastr";
+import { mensagemErro, mensagemSucesso } from "../components/toastr";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
 import Footer from "../components/footer/footer";
@@ -36,6 +36,10 @@ const CadastroAtivoAdquirido = () => {
   }, []);
 
   const cadastrar = () => {
+    if(ativoId === ""){
+      mensagemErro("Selecione um ativo");
+      return;
+    }
     if (searchParams.get("ativo_adquirido_id") == null) {            
       axios
         .post(`${BASE_URL}/ativoadquirido`, {
