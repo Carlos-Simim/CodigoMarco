@@ -46,7 +46,7 @@ const FormCadastroUsuario = () => {
       });
   };
   const cancelar = () => {
-    navigate("/");
+    navigate(-1);
   };
   return (
     <div className="container py-5 h-100">

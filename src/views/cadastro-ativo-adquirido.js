@@ -38,10 +38,21 @@ const CadastroAtivoAdquirido = () => {
           }
         )
         .then((response) => {
+          const year = response.data.dataAquisicao[0];
+          const month =
+            response.data.dataAquisicao[1].toString().length === 1
+              ? "0" + response.data.dataAquisicao[1].toString()
+              : response.data.dataAquisicao[1].toString();
+          const day =
+            response.data.dataAquisicao[2].toString().length === 1
+              ? "0" + response.data.dataAquisicao[2].toString()
+              : response.data.dataAquisicao[2].toString();
+          const data = `${year}-${month}-${day}`;
+
           setAtivoId(response.data.ativoId);
           setValor(response.data.valor);
           setQuantidade(response.data.quantidade);
-          setDataAquisicao(formatarData(response.data.dataAquisicao));
+          setDataAquisicao(data);
         });
     }
     axios

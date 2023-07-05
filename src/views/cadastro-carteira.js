@@ -17,7 +17,7 @@ const CadastroCarteira = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [nome, setNome] = useState("");
-  const [datacriacao, setDataCriacao] = useState("");
+  const [datacriacao, setDataCriacao] = useState(getTodayDate());
   const [usuarioId, setUsuarioId] = useState("");
   const email = localStorage.getItem("email");
   useEffect(() => {
@@ -120,6 +120,14 @@ const CadastroCarteira = () => {
   const cancelar = () => {
     navigate("/lista-carteiras");
   };
+
+  function getTodayDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
 
   return (
     <div className="container">
