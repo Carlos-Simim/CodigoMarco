@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { mensagemAlert } from "../components/toastr";
 import { parseData } from "../utils/requests";
 import { mensagemSucesso } from "../components/toastr";
+import { doLogout } from "../services/authservice";
 
 const DetalheCarteira = () => {
   const [searchParams] = useSearchParams();
@@ -22,9 +23,23 @@ const DetalheCarteira = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
     axios
       .get(
-        `${BASE_URL}/ativoadquirido/carteira=${searchParams.get("carteira_id")}`
+        `${BASE_URL}/ativoadquirido/carteira=${searchParams.get(
+          "carteira_id"
+        )}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+          },
+        }
       )
       .then((response) => {
         setCarteira(response.data);
@@ -36,14 +51,31 @@ const DetalheCarteira = () => {
   };
 
   const editar = (id) => {
-    navigate(`/cadastro-ativo-adquirido?carteira_id=${searchParams.get("carteira_id")}&ativo_adquirido_id=${id}`);
+    navigate(
+      `/cadastro-ativo-adquirido?carteira_id=${searchParams.get(
+        "carteira_id"
+      )}&ativo_adquirido_id=${id}`
+    );
   };
 
-  const excluir = (id) => {    
-    axios.delete(`${BASE_URL}/ativoadquirido/${id}`).then((response) => {
-      mensagemSucesso("Ativo adquirido excluída com sucesso!");
-      setCarteira(carteira.filter((ativo) => ativo.id !== id));
-    });
+  const excluir = (id) => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
+    axios
+      .delete(`${BASE_URL}/ativoadquirido/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+        },
+      })
+      .then((response) => {
+        mensagemSucesso("Ativo adquirido excluída com sucesso!");
+        setCarteira(carteira.filter((ativo) => ativo.id !== id));
+      });
   };
 
   const onClickAtivo = (x) => {
@@ -52,7 +84,11 @@ const DetalheCarteira = () => {
 
   return (
     <div className="container" style={{ marginBottom: 150 }}>
-      <Navbar title="Gerenciador de carteiras" deslogar={true} listarAtivos={true}/>
+      <Navbar
+        title="Gerenciador de carteiras"
+        deslogar={true}
+        listarAtivos={true}
+      />
       <Card title="Detalhes Carteira">
         <div className="row">
           <div className="col-sm-6 mb-2">
@@ -149,7 +185,9 @@ const DetalheCarteira = () => {
         <Link
           style={{ float: "left" }}
           className="btn btn-success ms-2"
-          to={`/cadastro-ativo-adquirido?carteira_id=${searchParams.get("carteira_id")}`}
+          to={`/cadastro-ativo-adquirido?carteira_id=${searchParams.get(
+            "carteira_id"
+          )}`}
         >
           Cadastrar Ativo Adquirido
         </Link>
@@ -166,7 +204,7 @@ const DetalheCarteira = () => {
           to={getTo("/lista-carteiras") ? "#" : "/lista-carteiras"}
         >
           Voltar
-        </Link>        
+        </Link>
       </Card>
 
       <Footer />

@@ -11,15 +11,27 @@ import Navbar from "../components/navbar/navbar";
 import Footer from "../components/footer/footer";
 import { BASE_URL } from "../utils/requests";
 import axios from "axios";
+import { doLogout } from "../services/authservice";
 
 const CadastroAtivo = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
     if (searchParams.get("ativo_id") != null) {
       axios
-        .get(`${BASE_URL}/ativo/${searchParams.get("ativo_id")}`)
+        .get(`${BASE_URL}/ativo/${searchParams.get("ativo_id")}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+          },
+        })
         .then((response) => {
           setNome(response.data.nome);
           setTipo(response.data.tipo);
@@ -28,12 +40,27 @@ const CadastroAtivo = () => {
   }, []);
 
   const cadastrar = () => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
     if (searchParams.get("ativo_id") == null) {
       axios
-        .post(`${BASE_URL}/ativo`, {
-          nome: nome,
-          tipo: tipo,
-        })
+        .post(
+          `${BASE_URL}/ativo`,
+          {
+            nome: nome,
+            tipo: tipo,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+            },
+          }
+        )
         .then((response) => {
           mensagemSucesso(`Ativo ${nome} cadastrada com sucesso!`);
           navigate("/lista-ativos");
@@ -43,10 +70,18 @@ const CadastroAtivo = () => {
         });
     } else {
       axios
-        .put(`${BASE_URL}/ativo/${searchParams.get("ativo_id")}`, {
-          nome: nome,
-          tipo: tipo,
-        })
+        .put(
+          `${BASE_URL}/ativo/${searchParams.get("ativo_id")}`,
+          {
+            nome: nome,
+            tipo: tipo,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+            },
+          }
+        )
         .then((response) => {
           mensagemSucesso(`Ativo ${nome} editado com sucesso!`);
           navigate("/lista-ativos");
@@ -62,7 +97,7 @@ const CadastroAtivo = () => {
 
   return (
     <div className="container">
-      <Navbar deslogar={true} listarAtivos={true}/>
+      <Navbar deslogar={true} listarAtivos={true} />
       <div className="container py-5 h-100">
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-12 col-md-8 col-lg-6 col-xl-6">
@@ -95,7 +130,7 @@ const CadastroAtivo = () => {
                         name="tipo"
                         onChange={(e) => setTipo(e.target.value)}
                       />
-                    </FormGroup>                  
+                    </FormGroup>
                   </div>
                 </div>
               </div>

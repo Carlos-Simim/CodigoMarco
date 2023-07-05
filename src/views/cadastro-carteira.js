@@ -11,6 +11,7 @@ import Navbar from "../components/navbar/navbar";
 import Footer from "../components/footer/footer";
 import { BASE_URL } from "../utils/requests";
 import axios from "axios";
+import { doLogout } from "../services/authservice";
 
 const CadastroCarteira = () => {
   const navigate = useNavigate();
@@ -20,9 +21,20 @@ const CadastroCarteira = () => {
   const [usuarioId, setUsuarioId] = useState("");
   const email = localStorage.getItem("email");
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
     if (searchParams.get("carteira_id") != null) {
       axios
-        .get(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`)
+        .get(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+          },
+        })
         .then((response) => {
           const year = response.data.dataCriacao[0];
           const month =
@@ -39,9 +51,17 @@ const CadastroCarteira = () => {
           setDataCriacao(data);
           setUsuarioId(response.data.usuarioId);
         });
-    }else{
+    } else {
       axios
-        .post(`${BASE_URL}/usuario/token`, {login: email})
+        .post(
+          `${BASE_URL}/usuario/token`,
+          { login: email },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+            },
+          }
+        )
         .then((response) => {
           setUsuarioId(response.data);
         });
@@ -49,24 +69,47 @@ const CadastroCarteira = () => {
   }, []);
 
   const cadastrar = () => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
     if (searchParams.get("carteira_id") == null) {
       axios
-        .post(`${BASE_URL}/carteira`, {
-          nome: nome,
-          dataCriacao: datacriacao + "T00:00:00.000Z",
-          usuarioId: usuarioId
-        })
+        .post(
+          `${BASE_URL}/carteira`,
+          {
+            nome: nome,
+            dataCriacao: datacriacao + "T00:00:00.000Z",
+            usuarioId: usuarioId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+            },
+          }
+        )
         .then((response) => {
           mensagemSucesso(`Carteira ${nome} cadastrada com sucesso!`);
           navigate("/lista-carteiras");
         });
     } else {
       axios
-        .put(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`, {
-          nome: nome,
-          dataCriacao: datacriacao + "T00:00:00.000Z",
-          usuarioId: usuarioId,
-        })
+        .put(
+          `${BASE_URL}/carteira/${searchParams.get("carteira_id")}`,
+          {
+            nome: nome,
+            dataCriacao: datacriacao + "T00:00:00.000Z",
+            usuarioId: usuarioId,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+            },
+          }
+        )
         .then((response) => {
           mensagemSucesso(`Carteira ${nome} editada com sucesso!`);
           navigate("/lista-carteiras");

@@ -10,7 +10,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { mensagemSucesso } from "../components/toastr";
 import { parseData } from "../utils/requests";
-
+import { doLogout } from "../services/authservice";
 import { BASE_URL } from "../utils/requests";
 import axios from "axios";
 
@@ -19,8 +19,19 @@ const ListaCarteiras = () => {
   const [carteiras, setCarteiras] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
     axios
-      .get(`${BASE_URL}/carteira`)
+      .get(`${BASE_URL}/carteira`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+        },
+      })
 
       .then((response) => {
         setCarteiras(response.data);
@@ -40,15 +51,32 @@ const ListaCarteiras = () => {
   }
 
   function excluir(id) {
-    axios.delete(`${BASE_URL}/carteira/${id}`).then((response) => {
-      mensagemSucesso("Carteira excluída com sucesso!");
-      setCarteiras(carteiras.filter((x) => x.id !== id));
-    });
+    const token = localStorage.getItem("token"); // Obtenha o token do LocalStorage
+
+    if (!token) {
+      doLogout();
+      navigate("/");
+    }
+
+    axios
+      .delete(`${BASE_URL}/carteira/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+        },
+      })
+      .then((response) => {
+        mensagemSucesso("Carteira excluída com sucesso!");
+        setCarteiras(carteiras.filter((x) => x.id !== id));
+      });
   }
 
   return (
     <div className="container">
-      <Navbar title="Gerenciador de carteiras" deslogar={true} listarAtivos={true} />
+      <Navbar
+        title="Gerenciador de carteiras"
+        deslogar={true}
+        listarAtivos={true}
+      />
       <Card title="Carteiras">
         <div className="row">
           <div className="col-lg-12">
