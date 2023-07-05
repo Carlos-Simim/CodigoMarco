@@ -3,13 +3,12 @@ import React from "react";
 import Stack from "@mui/material/Stack";
 
 import Card from "../components/card";
-import FormGroup from "../components/form-group";
 import { useState, useEffect } from "react";
-import { mensagemErro, mensagemSucesso } from "../components/toastr";
+import { mensagemErro  } from "../components/toastr";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
 import Footer from "../components/footer/footer";
-import { BASE_URL, parseData } from "../utils/requests";
+import { BASE_URL } from "../utils/requests";
 import axios from "axios";
 import { doLogout } from "../services/authservice";
 
@@ -97,6 +96,9 @@ const CadastroAtivoAdquirido = () => {
         )
         .then((response) => {
           navigate(`/carteira?carteira_id=${searchParams.get("carteira_id")}`);
+        })
+        .catch((error) => {
+          mensagemErro(error.response.data);
         });
     } else {
       axios
@@ -119,6 +121,9 @@ const CadastroAtivoAdquirido = () => {
         )
         .then((response) => {
           navigate(`/carteira?carteira_id=${searchParams.get("carteira_id")}`);
+        })
+        .catch((error) => {
+          mensagemErro(error.response.data);
         });
     }
   };
@@ -131,20 +136,6 @@ const CadastroAtivoAdquirido = () => {
     return `${year}-${month}-${day}`;
   }
 
-  function formatarData(data) {
-    data = parseData(data);
-    var dia = data.toString().split("/")[0];
-    var mes = data.toString().split("/")[1];
-    var ano = data.toString().split("/")[2];
-
-    if (mes.split("").length == 1) {
-      mes = "0" + mes;
-    }
-
-    return ano + "-" + mes + "-" + dia;
-  }
-
-  const [ativo, setAtivo] = useState("");
   const [valor, setValor] = useState("");
   const [quantidade, setQuantidade] = useState("");
   const [dataAquisicao, setDataAquisicao] = useState(getTodayDate());
