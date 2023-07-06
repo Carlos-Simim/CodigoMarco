@@ -20,6 +20,14 @@ import { doLogout } from "../services/authservice";
 const DetalheCarteira = () => {
   const [searchParams] = useSearchParams();
   const [carteira, setCarteira] = useState([]);
+
+  const [beta, SetBeta] = useState("");
+  const [volatilidade, SetVolatilidade] = useState("");
+  const [risco, SetRisco] = useState("");
+  const [retorno, SetRetorno] = useState("");
+  const [pl, SetPl] = useState("");
+  const [total, SetTotal] = useState("");
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +51,21 @@ const DetalheCarteira = () => {
       )
       .then((response) => {
         setCarteira(response.data);
+      });
+
+    axios
+      .get(`${BASE_URL}/carteira/${searchParams.get("carteira_id")}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Adicione o token como header de autorização
+        },
+      })
+      .then((response) => {
+        SetBeta(response?.data?.beta);
+        SetVolatilidade(response?.data?.volatilidade);
+        SetRisco(response?.data?.risco);
+        SetRetorno(response?.data?.retorno);
+        SetPl(response?.data?.pl);
+        SetTotal(response?.data?.total);
       });
   }, []);
 
@@ -102,27 +125,27 @@ const DetalheCarteira = () => {
               <tbody>
                 <tr>
                   <td>Beta</td>
-                  <td>placeholder</td>
+                  <td>{beta}</td>
                 </tr>
                 <tr>
                   <td>Volatilidade</td>
-                  <td>placeholder</td>
+                  <td>{volatilidade}</td>
                 </tr>
                 <tr>
                   <td>Risco</td>
-                  <td>placeholder</td>
+                  <td>{risco}</td>
                 </tr>
                 <tr>
                   <td>Retorno</td>
-                  <td>placeholder</td>
+                  <td>{retorno}</td>
                 </tr>
                 <tr>
                   <td>P/L</td>
-                  <td>placeholder</td>
+                  <td>{pl}</td>
                 </tr>
                 <tr>
                   <td>Total</td>
-                  <td>placeholder</td>
+                  <td>{total}</td>
                 </tr>
               </tbody>
             </table>
@@ -141,7 +164,7 @@ const DetalheCarteira = () => {
                   <tr>
                     <th>Nome</th>
                     <th> Preço unitário </th>
-                    <th>rentabilidade</th>
+                    <th>Retorno</th>
                     <th className="d-none d-sm-table-cell">Data aquisição</th>
                     <th className="d-none d-sm-table-cell">Editar</th>
                     <th className="d-none d-sm-table-cell">Deletar</th>
@@ -157,7 +180,7 @@ const DetalheCarteira = () => {
                         {x.ativoDto.nome}{" "}
                       </td>
                       <td>R${x.valor}</td>
-                      <td>placeholder</td>
+                      <td>{x.retorno}</td>
                       <td>{parseData(x.dataAquisicao)} </td>
                       <td>
                         <IconButton

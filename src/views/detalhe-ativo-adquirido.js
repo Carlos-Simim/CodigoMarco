@@ -19,6 +19,10 @@ const DetalheAtivoAdquirido = () => {
   const [searchParams] = useSearchParams();
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
+
+  const [retorno, setRetorno] = useState("");
+  const [volatilidade, setVolatilidade] = useState("");
+
   const [quantidade, setQuantidade] = useState("");
   const [dataaquisicao, setDataAquisicao] = useState("");
   const [tabValue, setTabValue] = useState(0);
@@ -42,11 +46,16 @@ const DetalheAtivoAdquirido = () => {
         },
       })
       .then((response) => {
+        console.log(response);
+
         setNome(response.data.ativoDto.nome);
         setPreco(response.data.valor);
         setQuantidade(response.data.quantidade);
         setDataAquisicao(response.data.dataAquisicao);
         setAtivoId(response.data.ativoId);
+        setRetorno(response.data.retorno);
+        setVolatilidade(response.data.volatilidade);
+
         axios
           .get(`${BASE_URL}/historicopreco/ativo_id=${response.data.ativoId}`, {
             headers: {
@@ -111,11 +120,11 @@ const DetalheAtivoAdquirido = () => {
                 </tr>
                 <tr>
                   <td>Volatilidade</td>
-                  <td>placeholder</td>
+                  <td>{volatilidade}</td>
                 </tr>
                 <tr>
                   <td>Retorno</td>
-                  <td>placeholder</td>
+                  <td>{retorno}</td>
                 </tr>
                 <tr>
                   <td> Data Aquisicao </td>
