@@ -46,8 +46,6 @@ const DetalheAtivoAdquirido = () => {
         },
       })
       .then((response) => {
-        console.log(response);
-
         setNome(response.data.ativoDto.nome);
         setPreco(response.data.valor);
         setQuantidade(response.data.quantidade);

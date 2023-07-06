@@ -11,7 +11,6 @@ export async function getCarteiras() {
       },
     })
     .then((response) => {
-      console.log(response.data);
       return response;
     })
     .catch((err) => {
@@ -29,7 +28,6 @@ export async function getCarteira(id) {
       },
     })
     .then((response) => {
-      console.log(response.data);
       return response;
     })
     .catch((err) => {
